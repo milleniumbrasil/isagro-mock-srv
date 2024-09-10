@@ -48,6 +48,7 @@ export class AppController {
   }
   
 
+  @Get('organicas/stacked')
   getStackedData(): IStackedData[] {
     return [
       { period: '1990', entry: ["grão", 100] },
