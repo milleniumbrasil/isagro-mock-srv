@@ -2,7 +2,7 @@
 
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IPercentualAreaChart } from './data/types';
+import { IPercentualData } from './data/types';
 
 
 @Controller('data')
@@ -17,7 +17,7 @@ export class AppController {
   }
 
 
-  getPercentualData(): IPercentualAreaChart[] {
+  getPercentualData(): IPercentualData[] {
     const result = [
       { period: '1990', value: 100 },
       { period: '1990', value: 150 },
@@ -43,16 +43,16 @@ export class AppController {
       { period: '1995', value: 1300 },
       { period: '1995', value: 1450 },
       { period: '1995', value: 900},
-    ] as IPercentualAreaChart[];
+    ] as IPercentualData[];
     return result;
   }
   
   @Get('organicas/percentual')
-  getOrganicasAsPercentual(): IPercentualAreaChart[] {
-    const items: IPercentualAreaChart[] = this.getPercentualData();
+  getOrganicasAsPercentual(): IPercentualData[] {
+    const items: IPercentualData[] = this.getPercentualData();
     
     if (Array.isArray(items)) {
-      const groupedByPeriod = items.reduce((acc, item: IPercentualAreaChart) => {
+      const groupedByPeriod = items.reduce((acc, item: IPercentualData) => {
         const period: string = item.period;
   
         if (!acc[period]) {
@@ -64,15 +64,15 @@ export class AppController {
         return acc;
       }, {} as { [period: string]: number }); // O acumulador contém apenas o total de área por ano
       
-      // Mapeia para o formato da interface IPercentualAreaChart
-      const result: IPercentualAreaChart[] = Object.keys(groupedByPeriod).map(period => {
+      // Mapeia para o formato da interface IPercentualData
+      const result: IPercentualData[] = Object.keys(groupedByPeriod).map(period => {
         return {
           period: period, // 'period' corresponde ao ano como string
           value: groupedByPeriod[period], // 'area' é o total acumulado de áreas
         };
       });
   
-      return result; // Retorna um array de objetos que seguem a interface IPercentualAreaChart
+      return result; // Retorna um array de objetos que seguem a interface IPercentualData
     } else {
       throw Error("Invalid data");
     }
