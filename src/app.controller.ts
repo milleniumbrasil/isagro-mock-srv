@@ -2,7 +2,7 @@
 
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IPercentualData } from './data/types';
+import { IPercentualData, IStackedData } from './data/types';
 
 
 @Controller('data')
@@ -47,6 +47,42 @@ export class AppController {
     return result;
   }
   
+
+  getStackedData(): IStackedData[] {
+    return [
+      { period: '1990', entry: ["grão", 100] },
+      { period: '1990', entry: ["hortaliças", 150] },
+      { period: '1990', entry: ["fruticultura", 50] },
+      { period: '1990', entry: ["pastagem", 10] },
+      
+      { period: '1991', entry: ["grão", 250] },
+      { period: '1991', entry: ["hortaliças", 350] },
+      { period: '1991', entry: ["fruticultura", 200] },
+      { period: '1991', entry: ["pastagem", 100] },
+      
+      { period: '1992', entry: ["grão", 400] },
+      { period: '1992', entry: ["hortaliças", 500] },
+      { period: '1992', entry: ["fruticultura", 450] },
+      { period: '1992', entry: ["pastagem", 250] },
+    
+      { period: '1993', entry: ["grão", 800] },
+      { period: '1993', entry: ["hortaliças", 750] },
+      { period: '1993', entry: ["fruticultura", 800] },
+      { period: '1993', entry: ["pastagem", 450] },
+    
+      { period: '1994', entry: ["grão", 900] },
+      { period: '1994', entry: ["hortaliças", 900] },
+      { period: '1994', entry: ["fruticultura", 1100] },
+      { period: '1994', entry: ["pastagem", 900] },
+      
+      { period: '1995', entry: ["grão", 1200] },
+      { period: '1995', entry: ["hortaliças", 1300] },
+      { period: '1995', entry: ["fruticultura", 1450] },
+      { period: '1995', entry: ["pastagem", 9000] }
+    ] as IStackedData[];
+
+  }
+
   @Get('organicas/percentual')
   getOrganicasAsPercentual(): IPercentualData[] {
     const items: IPercentualData[] = this.getPercentualData();

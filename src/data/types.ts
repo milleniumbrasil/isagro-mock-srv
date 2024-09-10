@@ -4,10 +4,16 @@
     value: number;
   }
   
+  export interface IStackedData {
+    period: string;
+    entry: [label: string, value: number];
+  }
+
   export interface IData {
     country?: string;
     state?: string;
     city?: string;
     label?: string;
-    entry: [period: string, value: number];
+    period: string;
+    value: number;
   }
