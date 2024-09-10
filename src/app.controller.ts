@@ -19,30 +19,30 @@ export class AppController {
 
   getPercentualData(): IPercentualAreaChart[] {
     const result = [
-      { period: '1990', area: 100 },
-      { period: '1990', area: 150 },
-      { period: '1990', area: 50 },
-      { period: '1990', area: 10 },
-      { period: '1991', area: 250 },
-      { period: '1991', area: 350 },
-      { period: '1991', area: 200 },
-      { period: '1991', area: 100 },
-      { period: '1992', area: 400 },
-      { period: '1992', area: 500 },
-      { period: '1992', area: 450 },
-      { period: '1992', area: 250 },
-      { period: '1993', area: 800 },
-      { period: '1993', area: 750 },
-      { period: '1993', area: 800 },
-      { period: '1993', area: 450 },
-      { period: '1994', area: 900 },
-      { period: '1994', area: 900 },
-      { period: '1994', area: 1100 },
-      { period: '1994', area: 900 },
-      { period: '1995', area: 1200 },
-      { period: '1995', area: 1300 },
-      { period: '1995', area: 1450 },
-      { period: '1995', area: 900},
+      { period: '1990', value: 100 },
+      { period: '1990', value: 150 },
+      { period: '1990', value: 50 },
+      { period: '1990', value: 10 },
+      { period: '1991', value: 250 },
+      { period: '1991', value: 350 },
+      { period: '1991', value: 200 },
+      { period: '1991', value: 100 },
+      { period: '1992', value: 400 },
+      { period: '1992', value: 500 },
+      { period: '1992', value: 450 },
+      { period: '1992', value: 250 },
+      { period: '1993', value: 800 },
+      { period: '1993', value: 750 },
+      { period: '1993', value: 800 },
+      { period: '1993', value: 450 },
+      { period: '1994', value: 900 },
+      { period: '1994', value: 900 },
+      { period: '1994', value: 1100 },
+      { period: '1994', value: 900 },
+      { period: '1995', value: 1200 },
+      { period: '1995', value: 1300 },
+      { period: '1995', value: 1450 },
+      { period: '1995', value: 900},
     ] as IPercentualAreaChart[];
     return result;
   }
@@ -52,23 +52,23 @@ export class AppController {
     const items: IPercentualAreaChart[] = this.getPercentualData();
     
     if (Array.isArray(items)) {
-      const groupedByYear = items.reduce((acc, item: IPercentualAreaChart) => {
-        const year: string = item.period;
+      const groupedByPeriod = items.reduce((acc, item: IPercentualAreaChart) => {
+        const period: string = item.period;
   
-        if (!acc[year]) {
-          acc[year] = 0; // Inicializa o total de área como 0 para o ano
+        if (!acc[period]) {
+          acc[period] = 0; // Inicializa o total de área como 0 para o ano
         }
   
-        acc[year] += item.area; // Soma a área para o ano correspondente
+        acc[period] += item.value; // Soma a área para o ano correspondente
   
         return acc;
-      }, {} as { [year: string]: number }); // O acumulador contém apenas o total de área por ano
+      }, {} as { [period: string]: number }); // O acumulador contém apenas o total de área por ano
       
       // Mapeia para o formato da interface IPercentualAreaChart
-      const result: IPercentualAreaChart[] = Object.keys(groupedByYear).map(year => {
+      const result: IPercentualAreaChart[] = Object.keys(groupedByPeriod).map(period => {
         return {
-          period: year, // 'period' corresponde ao ano como string
-          area: groupedByYear[year], // 'area' é o total acumulado de áreas
+          period: period, // 'period' corresponde ao ano como string
+          value: groupedByPeriod[period], // 'area' é o total acumulado de áreas
         };
       });
   
