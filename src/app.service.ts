@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { IPercentualData } from './types';
 
 @Injectable()
 export class AppService {
+
   getData(): { geocodigo: number; data: string; fonte: string; valor: number; }[] {
     return [
       {
