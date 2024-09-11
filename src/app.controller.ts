@@ -3,6 +3,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { IPercentualData, IStackedData } from './data/types';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 
 @Controller('data')
@@ -11,6 +12,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {
   }
 
+  @ApiOperation({ summary: 'Obter dados gerais' })
+  @ApiResponse({ status: 200, description: 'Dados retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get()
   getData() {
     return this.appService.getData();
@@ -46,9 +50,11 @@ export class AppController {
     ] as IPercentualData[];
     return result;
   }  
-
+  @ApiOperation({ summary: 'Obter dados empilhados de orgânicas' })
+  @ApiResponse({ status: 200, description: 'Dados empilhados de orgânicas retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('organicas/stacked')
-  getStackedData(): IStackedData[] {
+  getStackedDataOrganicas(): IStackedData[] {
     return [
       { period: '1990', entry: ["grão", 100] },
       { period: '1990', entry: ["hortaliças", 150] },
@@ -116,6 +122,9 @@ export class AppController {
     return result;
   }
   
+  @ApiOperation({ summary: 'Obter dados de erosão por área' })
+  @ApiResponse({ status: 200, description: 'Dados de erosão por área retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/area/stacked')
   getStackedDataErosaoAreaAgropecuaria(): IStackedData[] {
     return [
@@ -164,6 +173,9 @@ export class AppController {
     return result;
   }
 
+  @ApiOperation({ summary: 'Obter dados de risco de erosão em culturas' })
+  @ApiResponse({ status: 200, description: 'Dados de risco de erosão em culturas retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/risco/culturas/stacked')
   getStackedDataErosaoCulturas(): IStackedData[] {
     return [
@@ -218,6 +230,9 @@ export class AppController {
     return result;
   }
 
+  @ApiOperation({ summary: 'Obter dados de risco de erosão em pastagens' })
+  @ApiResponse({ status: 200, description: 'Dados de risco de erosão em pastagens retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/risco/pastagens/stacked')
   getStackedDataErosaoPastagens(): IStackedData[] {
     return [
@@ -248,6 +263,9 @@ export class AppController {
 
   }
 
+  @ApiOperation({ summary: 'Obter dados percentuais de orgânicas' })
+  @ApiResponse({ status: 200, description: 'Dados percentuais de orgânicas retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('organicas/percentual')
   getOrganicasAsPercentual(): IPercentualData[] {
     const items: IPercentualData[] = this.getPercentualData();
@@ -279,6 +297,9 @@ export class AppController {
     }
   }
 
+  @ApiOperation({ summary: 'Obter dados percentuais de erosão por área' })
+  @ApiResponse({ status: 200, description: 'Dados percentuais de erosão por área retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/area/percentual')
   getErosaoAsPercentual(): IPercentualData[] {
     const items: IPercentualData[] = this.getPercentualErosaoAreaData();
@@ -310,6 +331,9 @@ export class AppController {
     }
   }
 
+  @ApiOperation({ summary: 'Obter dados percentuais de risco de erosão em culturas' })
+  @ApiResponse({ status: 200, description: 'Dados percentuais de risco de erosão em culturas retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/risco/culturas/percentual')
   getErosaoRiscoCultusAsPercentual(): IPercentualData[] {
     const items: IPercentualData[] = this.getPercentualErosaoRiscoCulturasData();
@@ -341,6 +365,9 @@ export class AppController {
     }
   }
 
+  @ApiOperation({ summary: 'Obter dados percentuais de risco de erosão em pastagens' })
+  @ApiResponse({ status: 200, description: 'Dados percentuais de risco de erosão em pastagens retornados com sucesso.' })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('erosao/risco/pastagens/percentual')
   getErosaoRiscoPastagensAsPercentual(): IPercentualData[] {
     const items: IPercentualData[] = this.getPercentualErosaoRiscoPastagensData();
