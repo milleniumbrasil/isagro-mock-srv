@@ -12,7 +12,7 @@ export class IStackedData {
   @ApiProperty({ description: 'O período de tempo representado', example: '1990' })
   period: string;
 
-  @ApiProperty({ description: 'Entrada contendo um rótulo e o valor associado', example: ['grão', 100] })
+  @ApiProperty({ description: 'Entrada contendo um rótulo e o valor associado', example: ['rótulo', 100] })
   entry: [label: string, value: number];
 }
 
