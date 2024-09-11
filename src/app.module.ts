@@ -3,11 +3,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DataController } from './data/data.controller';
+import { ErosaoController } from './erosao/erosao.controller';
+import { OrganicasController } from './organicas/organicas.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, DataController],
+  controllers: [AppController, ErosaoController, OrganicasController],
   providers: [AppService],
 })
 export class AppModule {}

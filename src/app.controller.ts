@@ -2,7 +2,7 @@
 
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IPercentualData, IStackedData } from './data/types';
+import { IPercentualData, IStackedData } from './types';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 
