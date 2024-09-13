@@ -1,4 +1,16 @@
-import { Controller } from "@nestjs/common"
+import { Controller, Get } from "@nestjs/common"
+import { GEEService } from "./gee.service";
+import { IStackedData } from "src/types";
+import { BaseController } from "../BaseController";
 
 @Controller("gee")
-export class GEEController {}
+export class GEEController extends BaseController<GEEService> {
+
+  constructor(service: GEEService) {
+    super(service);
+  }
+
+  protected getServiceStackedData(): IStackedData[] {
+    return this.service.getStackedData();
+  }
+}
