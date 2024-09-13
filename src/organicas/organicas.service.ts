@@ -1,8 +1,17 @@
 import { Injectable } from "@nestjs/common"
-import { IPercentualData } from "../types"
+import { IStackedData, IPercentualData } from "../types"
+import { BaseService } from "src/BaseService";
 
 @Injectable()
-export class OrganicasService {
+export class OrganicasService extends BaseService {
+
+  protected getStackedDataValues(): IStackedData[] {
+    return [
+      { period: "2000", entry: ["example1", 500] },
+      { period: "2001", entry: ["example2", 600] },
+    ];
+  }
+
 	getPercentualData(): IPercentualData[] {
 		const result = [
 			{ period: "1990", value: 100 },
@@ -33,3 +42,4 @@ export class OrganicasService {
 		return result
 	}
 }
+

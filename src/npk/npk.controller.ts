@@ -17,6 +17,6 @@ export class NPKController {
 	@ApiResponse({ status: 500, description: "Erro no servidor." })
 	@Get("npk/stacked")
 	getData() {
-		return this.service.getNPKData()
+		return this.service.getStackedData()
 	}
 }
