@@ -1,6 +1,6 @@
 import { Controller, Get } from "@nestjs/common"
 import { GEEService } from "./gee.service";
-import { IStackedData } from "src/types";
+import { IStackedData } from "../types";
 import { BaseController } from "../BaseController";
 
 @Controller("gee")

@@ -1,11 +1,19 @@
 import { Controller, Get } from "@nestjs/common"
-import { ApiOperation, ApiResponse } from "@nestjs/swagger"
-import { IPercentualData, IStackedData } from "src/types"
-import { OrganicasService } from "./organicas.service"
+import { OrganicasService } from "./organicas.service";
+import { IPercentualData, IStackedData } from "../types";
+import { BaseController } from "../BaseController";
+import { ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 @Controller("organicas")
-export class OrganicasController {
-	constructor(private readonly service: OrganicasService) {}
+export class OrganicasController extends BaseController<OrganicasService> {
+
+  constructor(service: OrganicasService) {
+    super(service);
+  }
+
+  protected getServiceStackedData(): IStackedData[] {
+    return this.service.getStackedData();
+  }
 
 	@ApiOperation({ summary: "Obter dados empilhados de orgânicas" })
 	@ApiResponse({

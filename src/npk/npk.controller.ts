@@ -1,22 +1,16 @@
 import { Controller, Get } from "@nestjs/common"
-import { NPKService } from "./npk.service"
-import { ApiOperation, ApiResponse } from "@nestjs/swagger"
-import { IStackedData } from "src/types"
+import { NPKService } from "./npk.service";
+import { IStackedData } from "../types";
+import { BaseController } from "../BaseController";
 
 @Controller("npk")
-export class NPKController {
-	constructor(private readonly service: NPKService) {}
+export class NPKController extends BaseController<NPKService> {
 
-	@ApiOperation({ summary: "Obter dados empilhados de dados NPK" })
-	@ApiResponse({
-		status: 200,
-		description: "Dados empilhados de NPK retornados com sucesso.",
-		type: IStackedData,
-		isArray: true,
-	})
-	@ApiResponse({ status: 500, description: "Erro no servidor." })
-	@Get("npk/stacked")
-	getData() {
-		return this.service.getStackedData()
-	}
+  constructor(service: NPKService) {
+    super(service);
+  }
+
+  protected getServiceStackedData(): IStackedData[] {
+    return this.service.getStackedData();
+  }
 }

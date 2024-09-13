@@ -1,25 +1,19 @@
 import { Controller, Get } from "@nestjs/common"
 import { ApiOperation, ApiResponse } from "@nestjs/swagger"
-import { IPercentualData, IStackedData } from "src/types"
 import { ErosaoService } from "./erosao.service"
+import { IPercentualData, IStackedData } from "../types";
+import { BaseController } from "../BaseController";
 
 @Controller("erosao")
-export class ErosaoController {
+export class ErosaoController extends BaseController<ErosaoService> {
 
-	constructor(private readonly service: ErosaoService) {}
+  constructor(service: ErosaoService) {
+    super(service);
+  }
 
-	@ApiOperation({ summary: "Obter dados empilhados de Erosao" })
-	@ApiResponse({
-		status: 200,
-		description: "Dados empilhados de Erosao retornados com sucesso.",
-		type: IStackedData,
-		isArray: true,
-	})
-	@ApiResponse({ status: 500, description: "Erro no servidor." })
-	@Get("stacked")
-	getStackedErosaoData(): IStackedData[] {
-		return this.service.getStackedData();
-	}
+  protected getServiceStackedData(): IStackedData[] {
+    return this.service.getStackedData();
+  }
 
 	@ApiOperation({ summary: "Obter dados percentuais de erosão por área" })
 	@ApiResponse({
