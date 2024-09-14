@@ -66,4 +66,31 @@ export class OrganicasController extends BaseController<OrganicasService> {
 
 		return this.service.getPercentualDataByLabel(label);
 	}
+
+	@ApiOperation({ summary: "Obter numeros absolutos de orgânicas por label" })
+	@ApiParam({
+		name: 'label',
+		required: true,
+		description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+		example: 'hortaliças',
+		enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'], // Define as opções disponíveis no Swagger
+	})
+	@ApiResponse({
+		status: 200,
+		description: "Dados absolutos de orgânicas por label retornados com sucesso.",
+		type: IPercentualData,
+		isArray: true,
+	})
+	@ApiResponse({ status: 400, description: "Label inválido." })
+	@ApiResponse({ status: 500, description: "Erro no servidor." })
+	@Get(":label")
+	getDataByLabel(@Param('label') label: string): IPercentualData[] {
+		const validLabels = ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+
+		if (!validLabels.includes(label)) {
+			throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
+		}
+
+		return this.service.getPercentualDataByLabel(label);
+	}
 }
