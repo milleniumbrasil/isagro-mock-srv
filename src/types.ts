@@ -60,6 +60,9 @@ export class IData {
 	})
 	period: string
 
-	@ApiProperty({ description: "O valor associado ao período", example: 100 })
-	value: number
+	@ApiProperty({
+		description: "Entrada contendo um rótulo e o valor associado",
+		example: ["rótulo", 100],
+	})
+	entry: [label: string, value: number]
 }

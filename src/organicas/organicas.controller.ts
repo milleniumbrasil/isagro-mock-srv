@@ -67,7 +67,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
 		return this.service.getPercentualDataByLabel(label);
 	}
 
-	@ApiOperation({ summary: "Obter numeros absolutos de orgânicas por label" })
+	@ApiOperation({ summary: "Obter números absolutos de orgânicas por label" })
 	@ApiParam({
 		name: 'label',
 		required: true,

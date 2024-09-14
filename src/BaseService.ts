@@ -1,12 +1,19 @@
 import { Injectable, Logger } from "@nestjs/common"
-import { IPercentualData, IStackedData } from "./types"
+import { IData, IPercentualData, IStackedData } from "./types"
 
 @Injectable()
 export abstract class BaseService {
-	private readonly baseLogger = new Logger(BaseService.name)
-	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
-	protected abstract getStackedDataValues(): IStackedData[]
 
+	private readonly baseLogger = new Logger(BaseService.name)
+
+	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
+	protected abstract getData(): IData[]
+
+	// Método comum para todos os serviços
+	public getStackedDataValues(): IStackedData[] {
+		const data: IData[] = this.getData();
+		return this.toStackedData(data);
+	}
 	// Método comum para todos os serviços
 	public getStackedData(): IStackedData[] {
 		return this.getStackedDataValues()
@@ -16,6 +23,13 @@ export abstract class BaseService {
 		return data.map(item => ({
 			period: item.period,      // Copia o período diretamente
 			value: item.entry[1]      // Transforma o segundo valor do array `entry` no `value`
+		}));
+	}
+
+	protected toStackedData(data: IData[]): IStackedData[] {
+		return data.map(item => ({
+			period: item.period,      // Copia o período diretamente
+			entry: item.entry         // Copia o array 'entry' diretamente
 		}));
 	}
 
