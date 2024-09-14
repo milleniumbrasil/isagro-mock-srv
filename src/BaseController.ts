@@ -12,7 +12,6 @@ export class BaseController<T extends BaseService> {
     return this.service.getStackedDataValues();
   }
 
-  @Get('percentual')
   getPercentualData(): IPercentualData[] {
     return this.service.getPercentualDataByPeriod();
   }

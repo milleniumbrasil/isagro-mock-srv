@@ -30,6 +30,7 @@ export class ErosaoController extends BaseController<ErosaoService> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get('percentual')
   getPercentualData() {
     return super.getPercentualData();
   }

@@ -30,6 +30,7 @@ export class NH3Controller extends BaseController<NH3Service> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get('percentual')
   getPercentualData() {
     return super.getPercentualData();
   }
