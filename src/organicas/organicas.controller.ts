@@ -84,13 +84,13 @@ export class OrganicasController extends BaseController<OrganicasService> {
 	@ApiResponse({ status: 400, description: "Label inválido." })
 	@ApiResponse({ status: 500, description: "Erro no servidor." })
 	@Get(":label")
-	getDataByLabel(@Param('label') label: string): IPercentualData[] {
+	getDataByLabel(@Param('label') label: string): IStackedData[] {
 		const validLabels = ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
 
 		if (!validLabels.includes(label)) {
 			throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
 		}
 
-		return this.service.getPercentualDataByLabel(label);
+		return this.service.getDataByLabel(label);
 	}
 }
