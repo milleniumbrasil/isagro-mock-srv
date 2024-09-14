@@ -57,47 +57,10 @@ export class OrganicasService extends BaseService {
 		]
 	}
 
-	protected accumulatedByLabel(data: IStackedData[], label: string): IStackedData[] {
-		const filteredByLabel: IStackedData[] = data.filter((stackedItem) => {
-			return stackedItem.entry[0] === label;
-		});
-		const uniquePeriods = data.reduce((acc, current) => {
-			acc.add(current.period);
-			return acc;
-		}, new Set());
-		const accumulatedByLabel: IStackedData[] = [];
-		uniquePeriods.forEach((period) => {
-			filteredByLabel.forEach((stackedItem) => {
-				if (stackedItem.period === period) {
-					const latest = accumulatedByLabel.find((item) => item.period === period);
-					if (latest) {
-						latest.entry[1] += stackedItem.entry[1];
-					} else {
-						accumulatedByLabel.push({
-							period: stackedItem.period,
-							entry: [...stackedItem.entry] // Faz uma cópia do array de entry
-						});
-					}
-				}
-			});
-		});
-		return accumulatedByLabel;
-	}
-
-	protected reducePercentualByPeriod(data: IStackedData[]): IPercentualData[] {
-		const percentualsByPeriod = data.reduce((acc, stackedItem) => {
-			const period = stackedItem.period
-			const value = stackedItem.entry.reduce((acc, curr) => acc + curr[1], 0)
-			acc.push({ period, value });
-			return acc;
-		}, [] as IPercentualData[]);
-		return percentualsByPeriod;
-	}
-
 	public getPercentualData(): IPercentualData[] {
 		const stacked: IStackedData[] = this.reducePercentualByLabel(this.getStackedDataValues(), "pastagem");
 		const result: IPercentualData[] = this.toPercentualData(stacked);  // Chama a função de transformação
 		return result;
 	}
-	
+
 }
