@@ -39,9 +39,9 @@ export class GEEController extends BaseController<GEEService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: tecnologia2, tecnologia1, tecnologia3, tecnologia4',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['tecnologia2', 'tecnologia1', 'tecnologia3', 'tecnologia4'],
   })
   @ApiResponse({
     status: 200,
@@ -60,9 +60,9 @@ export class GEEController extends BaseController<GEEService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os dados devem ser retornados. Opções: tecnologia2, tecnologia1, tecnologia3, tecnologia4',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['tecnologia2', 'tecnologia1', 'tecnologia3', 'tecnologia4'],
   })
   @ApiResponse({
     status: 200,
