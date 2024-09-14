@@ -16,7 +16,6 @@ export class BaseController<T extends BaseService> {
     return this.service.getPercentualDataByPeriod();
   }
 
-  @Get('percentual/:label')
   getPercentualByLabel(@Param('label') label: string): IPercentualData[] {
     const validLabels = this.service.getValidLabels();
     if (!validLabels.includes(label)) {
