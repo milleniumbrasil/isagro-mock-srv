@@ -40,7 +40,7 @@ export class NPKController extends BaseController<NPKService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: dejetos animais, deposição atmosférica, fertilizantes minerais, fertilizantes orgânicos, fixação biológica de nitrogênio, resíduos culturais, resíduos industriais, resíduos urbanos, produção carne bovina, produção agrícola, área agropecuária',
     example: 'hortaliças',
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
   })
@@ -61,9 +61,9 @@ export class NPKController extends BaseController<NPKService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os dados devem ser retornados. Opções: dejetos animais, deposição atmosférica, fertilizantes minerais, fertilizantes orgânicos, fixação biológica de nitrogênio, resíduos culturais, resíduos industriais, resíduos urbanos, produção carne bovina, produção agrícola, área agropecuária',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['dejetos animais', 'deposição atmosférica', 'fertilizantes minerais', 'fertilizantes orgânicos', 'fixação biológica de nitrogênio', 'resíduos culturais', 'resíduos industriais', 'resíduos urbanos', 'produção carne bovina', 'produção agrícola', 'área agropecuária'],
   })
   @ApiResponse({
     status: 200,
