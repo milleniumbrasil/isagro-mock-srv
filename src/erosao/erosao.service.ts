@@ -8,7 +8,7 @@ export class ErosaoService extends BaseService {
     private readonly logger = new Logger(ErosaoService.name);
 
 	public getValidLabels(): string[] {
-		return ['pastagem', 'cultura', 'pastagem', 'cultura'];
+		return ['pastagem', 'cultura'];
 	}
 
 	public getData(): IData[] {
