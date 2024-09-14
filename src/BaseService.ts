@@ -19,7 +19,7 @@ export abstract class BaseService {
 		}));
 	}
 
-	protected reducePercentualByLabel(
+	protected getPercentualByPeriodsByLabel(
 		data: IStackedData[],
 		label: string,
 	): IStackedData[] {
@@ -74,7 +74,34 @@ export abstract class BaseService {
 		return percentualByLabel
 	}
 
-	protected reducePercentualByPeriod(
+	protected getStackedByPeriodByLabel(data: IStackedData[], label: string): IStackedData[] {
+		// Filtra os dados pelo label fornecido
+		const filteredByLabel: IStackedData[] = data.filter((stackedItem) => {
+			return stackedItem.entry[0] === label;
+		});
+
+		// Acumula os valores por período diretamente com reduce
+		const amountsByPeriod = filteredByLabel.reduce((acc, stackedItem) => {
+			const existingItem = acc.find((item) => item.period === stackedItem.period);
+
+			if (existingItem) {
+				// Se já existe um item para o mesmo período, soma o valor
+				existingItem.entry[1] += stackedItem.entry[1];
+			} else {
+				// Se não existe, adiciona um novo item ao acumulador
+				acc.push({
+					period: stackedItem.period,
+					entry: [label, stackedItem.entry[1]] // Cria uma nova entrada para o período e label
+				});
+			}
+
+			return acc;
+		}, [] as IStackedData[]);
+
+		return amountsByPeriod;
+	}
+
+	protected getPercentualByPeriods(
 		data: IStackedData[]
 	): IStackedData[] {
 		// Identifica os períodos únicos
@@ -117,7 +144,7 @@ export abstract class BaseService {
 				}
 				return {
 					period: stackedItem.period,
-					entry: ['period', percentual],
+					entry: ['percentual', percentual],
 				}
 			},
 		)
@@ -125,17 +152,17 @@ export abstract class BaseService {
 	}
 
 	public getDataByLabel(label: string): IStackedData[] {
-		return this.reducePercentualByLabel(this.getStackedDataValues(), label);
+		return this.getStackedByPeriodByLabel(this.getStackedDataValues(), label);
 	}
 
 	public getPercentualDataByLabel(label: string): IPercentualData[] {
-		const stacked: IStackedData[] = this.reducePercentualByLabel(this.getStackedDataValues(), label);
+		const stacked: IStackedData[] = this.getPercentualByPeriodsByLabel(this.getStackedDataValues(), label);
 		const result: IPercentualData[] = this.toPercentualData(stacked);  // Chama a função de transformação
 		return result;
 	}
 
 	public getPercentualDataByPeriod(): IPercentualData[] {
-		const stacked: IStackedData[] = this.reducePercentualByPeriod(this.getStackedDataValues());
+		const stacked: IStackedData[] = this.getPercentualByPeriods(this.getStackedDataValues());
 		const result: IPercentualData[] = this.toPercentualData(stacked);  // Chama a função de transformação
 		return result;
 	}
