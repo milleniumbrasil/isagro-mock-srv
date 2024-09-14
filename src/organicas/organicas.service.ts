@@ -1,12 +1,15 @@
-
-import { IStackedData, IPercentualData, IData } from "../types"
-import { BaseService } from "src/BaseService"
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from "@nestjs/common"
+import { IData } from "../types"
+import { BaseService } from "../BaseService";
 
 @Injectable()
 export class OrganicasService extends BaseService {
 
     private readonly logger = new Logger(OrganicasService.name);
+
+	public getValidLabels(): string[] {
+		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+	}
 
 	public getData(): IData[] {
 		return [

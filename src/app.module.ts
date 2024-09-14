@@ -19,15 +19,16 @@ import { OrganicasService } from "./organicas/organicas.service"
 	imports: [],
 	controllers: [
 		ErosaoController,
-		OrganicasController,
+		GEEController,
 		NPKController,
 		GEEController,
 		NH3Controller,
 		PoluicaoController,
+		OrganicasController,
 	],
 	providers: [
-		AppService,
 		ErosaoService,
+		GEEService,
 		NPKService,
 		GEEService,
 		NH3Service,

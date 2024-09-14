@@ -1,3 +1,5 @@
+// src/BaseService.ts
+
 import { Injectable, Logger } from "@nestjs/common"
 import { IData, IPercentualData, IStackedData } from "./types"
 
@@ -7,7 +9,10 @@ export abstract class BaseService {
 	private readonly baseLogger = new Logger(BaseService.name)
 
 	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
-	protected abstract getData(): IData[]
+	public abstract getData(): IData[]
+
+	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
+	public abstract getValidLabels(): string[]
 
 	// Método comum para todos os serviços
 	public getStackedDataValues(): IStackedData[] {

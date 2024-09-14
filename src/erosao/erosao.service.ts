@@ -1,11 +1,15 @@
 import { Injectable, Logger } from "@nestjs/common"
-import { IData, IPercentualData, IStackedData } from "../types"
-import { BaseService } from "src/BaseService";
+import { IData } from "../types"
+import { BaseService } from "../BaseService";
 
 @Injectable()
 export class ErosaoService extends BaseService {
 
     private readonly logger = new Logger(ErosaoService.name);
+
+	public getValidLabels(): string[] {
+		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+	}
 
 	public getData(): IData[] {
 		return [

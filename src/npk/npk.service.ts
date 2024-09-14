@@ -1,11 +1,15 @@
 import { Injectable, Logger } from "@nestjs/common"
-import { IData, IStackedData } from "../types"
-import { BaseService } from "src/BaseService";
+import { IData } from "../types"
+import { BaseService } from "../BaseService";
 
 @Injectable()
 export class NPKService extends BaseService {
 
     private readonly logger = new Logger(NPKService.name);
+
+	public getValidLabels(): string[] {
+		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+	}
 
 	public getData(): IData[] {
 		return [

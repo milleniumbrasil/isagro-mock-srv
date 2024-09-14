@@ -1,23 +1,37 @@
-import { Get } from "@nestjs/common";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
-import { IStackedData } from "./types";
+// src/BaseController.ts
 
-export abstract class BaseController<TService> {
+import { BadRequestException, Get, Param } from '@nestjs/common';
+import { BaseService } from './BaseService';
+import { IPercentualData, IStackedData } from './types';
 
-  constructor(protected readonly service: TService) {}
+export class BaseController<T extends BaseService> {
+  constructor(protected readonly service: T) {}
 
-  protected abstract getServiceStackedData(): IStackedData[];
-
-  @ApiOperation({ summary: "Obter dados empilhados." })
-  @ApiResponse({
-    status: 200,
-    description: "Dados empilhados retornados com sucesso.",
-    type: IStackedData,
-    isArray: true,
-  })
-  @ApiResponse({ status: 500, description: "Erro no servidor." })
-  @Get("stacked")
+  @Get('stacked')
   getStackedData(): IStackedData[] {
-    return this.getServiceStackedData();
+    return this.service.getStackedDataValues();
+  }
+
+  @Get('percentual')
+  getPercentualData(): IPercentualData[] {
+    return this.service.getPercentualDataByPeriod();
+  }
+
+  @Get('percentual/:label')
+  getPercentualByLabel(@Param('label') label: string): IPercentualData[] {
+    const validLabels = this.service.getValidLabels();
+    if (!validLabels.includes(label)) {
+      throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
+    }
+    return this.service.getPercentualDataByLabel(label);
+  }
+
+  @Get(':label')
+  getDataByLabel(@Param('label') label: string): IStackedData[] {
+    const validLabels = this.service.getValidLabels();
+    if (!validLabels.includes(label)) {
+      throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
+    }
+    return this.service.getDataByLabel(label);
   }
 }

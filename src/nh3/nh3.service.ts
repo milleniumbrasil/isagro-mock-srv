@@ -1,11 +1,15 @@
 import { Injectable, Logger } from "@nestjs/common"
-import { IData, IStackedData } from "../types"
-import { BaseService } from "src/BaseService";
+import { IData } from "../types"
+import { BaseService } from "../BaseService";
 
 @Injectable()
 export class NH3Service extends BaseService {
 
     private readonly logger = new Logger(NH3Service.name);
+
+	public getValidLabels(): string[] {
+		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+	}
 
 	public getData(): IData[] {
 		return [
