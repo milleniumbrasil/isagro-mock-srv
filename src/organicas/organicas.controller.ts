@@ -37,37 +37,6 @@ export class OrganicasController extends BaseController<OrganicasService> {
 	@ApiResponse({ status: 500, description: "Erro no servidor." })
 	@Get("percentual")
 	getOrganicasAsPercentual(): IPercentualData[] {
-		const items: IPercentualData[] = this.service.getPercentualData()
-
-		if (Array.isArray(items)) {
-			const groupedByPeriod = items.reduce(
-				(acc, item: IPercentualData) => {
-					const period: string = item.period
-
-					if (!acc[period]) {
-						acc[period] = 0 // Inicializa o total de área como 0 para o ano
-					}
-
-					acc[period] += item.value // Soma a área para o ano correspondente
-
-					return acc
-				},
-				{} as { [period: string]: number },
-			) // O acumulador contém apenas o total de área por ano
-
-			// Mapeia para o formato da interface IPercentualData
-			const result: IPercentualData[] = Object.keys(groupedByPeriod).map(
-				(period) => {
-					return {
-						period: period, // 'period' corresponde ao ano como string
-						value: groupedByPeriod[period], // 'area' é o total acumulado de áreas
-					}
-				},
-			)
-
-			return result // Retorna um array de objetos que seguem a interface IPercentualData
-		} else {
-			throw Error("Invalid data")
-		}
+		return this.service.getPercentualDataByPeriod();
 	}
 }

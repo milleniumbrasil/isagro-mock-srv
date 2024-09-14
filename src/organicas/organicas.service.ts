@@ -57,8 +57,14 @@ export class OrganicasService extends BaseService {
 		]
 	}
 
-	public getPercentualData(): IPercentualData[] {
-		const stacked: IStackedData[] = this.reducePercentualByLabel(this.getStackedDataValues(), "pastagem");
+	public getPercentualDataByLabel(label: string): IPercentualData[] {
+		const stacked: IStackedData[] = this.reducePercentualByLabel(this.getStackedDataValues(), label);
+		const result: IPercentualData[] = this.toPercentualData(stacked);  // Chama a função de transformação
+		return result;
+	}
+
+	public getPercentualDataByPeriod(): IPercentualData[] {
+		const stacked: IStackedData[] = this.reducePercentualByPeriod(this.getStackedDataValues());
 		const result: IPercentualData[] = this.toPercentualData(stacked);  // Chama a função de transformação
 		return result;
 	}

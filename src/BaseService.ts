@@ -88,8 +88,7 @@ export abstract class BaseService {
 	}
 
 	protected reducePercentualByPeriod(
-		data: IStackedData[],
-		label: string,
+		data: IStackedData[]
 	): IStackedData[] {
 		// Identifica os períodos únicos
 		const uniquePeriods = data.reduce((acc, current) => {
@@ -138,7 +137,7 @@ export abstract class BaseService {
 				}
 				return {
 					period: stackedItem.period,
-					entry: [label, percentual],
+					entry: ['period', percentual],
 				}
 			},
 		)
