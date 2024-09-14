@@ -1,4 +1,4 @@
-import { Controller } from "@nestjs/common"
+import { Controller, Get } from "@nestjs/common"
 import { BaseController } from "../BaseController";
 import { ApiOperation, ApiResponse, ApiParam } from "@nestjs/swagger";
 import { NPKService } from "./npk.service";
@@ -18,6 +18,7 @@ export class NPKController extends BaseController<NPKService> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get('stacked')
   getStackedData() {
     return super.getStackedData();
   }

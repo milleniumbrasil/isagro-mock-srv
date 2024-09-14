@@ -5,9 +5,9 @@ import { BaseService } from './BaseService';
 import { IPercentualData, IStackedData } from './types';
 
 export class BaseController<T extends BaseService> {
+
   constructor(protected readonly service: T) {}
 
-  @Get('stacked')
   getStackedData(): IStackedData[] {
     return this.service.getStackedDataValues();
   }

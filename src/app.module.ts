@@ -1,7 +1,6 @@
 // src/app.module.ts
 
 import { Module } from "@nestjs/common"
-import { AppService } from "./app.service"
 import { ErosaoController } from "./erosao/erosao.controller"
 import { OrganicasController } from "./organicas/organicas.controller"
 import { ErosaoService } from "./erosao/erosao.service"

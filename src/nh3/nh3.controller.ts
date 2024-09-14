@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { NH3Service } from './nh3.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
@@ -17,6 +17,7 @@ export class NH3Controller extends BaseController<NH3Service> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get('stacked')
   getStackedData() {
     return super.getStackedData();
   }
