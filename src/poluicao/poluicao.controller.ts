@@ -40,9 +40,9 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: nitrato, fosfato, cations, anions',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['nitrato', 'fosfato', 'cations', 'anions'],
   })
   @ApiResponse({
     status: 200,
@@ -61,9 +61,9 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os dados devem ser retornados. Opções: nitrato, fosfato, cations, anions',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['nitrato', 'fosfato', 'cations', 'anions'],
   })
   @ApiResponse({
     status: 200,
