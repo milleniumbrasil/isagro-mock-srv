@@ -86,4 +86,65 @@ export abstract class BaseService {
 		)
 		return percentualByLabel
 	}
+
+	protected reducePercentualByPeriod(
+		data: IStackedData[],
+		label: string,
+	): IStackedData[] {
+		// Identifica os períodos únicos
+		const uniquePeriods = data.reduce((acc, current) => {
+			acc.add(current.period)
+			return acc
+		}, new Set())
+		this.baseLogger.log(
+			`uniquePeriods: ${JSON.stringify(uniquePeriods, null, 2)}`,
+		)
+		// Acumula os valores por período
+		const amountsByPeriod: IStackedData[] = []
+		uniquePeriods.forEach((period) => {
+			data.forEach((stackedItem) => {
+				if (stackedItem.period === period) {
+					const latest = amountsByPeriod.find(
+						(item) => item.period === period,
+					)
+					if (latest) {
+						latest.entry[1] += stackedItem.entry[1]
+					} else {
+						amountsByPeriod.push({
+							period: stackedItem.period,
+							entry: [...stackedItem.entry], // Faz uma cópia do array de entry
+						})
+					}
+				}
+			})
+		})
+
+		this.baseLogger.log(
+			`accumulatedByLabel: ${JSON.stringify(amountsByPeriod, null, 2)}`,
+		)
+		// Calcula o total geral de todos os períodos
+		const totalSum = amountsByPeriod.reduce(
+			(acc, stackedItem) => acc + stackedItem.entry[1],
+			0,
+		)
+		// Calcula o percentual de cada período em relação ao total geral
+		const percentualByLabel: IStackedData[] = amountsByPeriod.map(
+			(stackedItem) => {
+				let percentual = (stackedItem.entry[1] / totalSum) * 100 // Percentual correto
+				if (percentual > 1) {
+					percentual = Math.round(percentual) // Arredonda para facilitar
+				} else {
+					percentual = parseFloat(percentual.toFixed(2)) // Ajusta para duas casas decimais
+				}
+				return {
+					period: stackedItem.period,
+					entry: [label, percentual],
+				}
+			},
+		)
+		this.baseLogger.log(
+			`percentualByLabel: ${JSON.stringify(percentualByLabel, null, 2)}`,
+		)
+		return percentualByLabel
+	}
 }
