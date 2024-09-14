@@ -26,18 +26,12 @@ export abstract class BaseService {
 		// Filtra os dados pelo label fornecido
 		const filteredByLabel: IStackedData[] = data.filter((stackedItem) => {
 			return stackedItem.entry[0] === label
-		})
-		this.baseLogger.log(
-			`filteredByLabel: ${JSON.stringify(filteredByLabel, null, 2)}`,
-		)
+		});
 		// Identifica os períodos únicos
 		const uniquePeriods = data.reduce((acc, current) => {
 			acc.add(current.period)
 			return acc
-		}, new Set())
-		this.baseLogger.log(
-			`uniquePeriods: ${JSON.stringify(uniquePeriods, null, 2)}`,
-		)
+		}, new Set());
 		// Acumula os valores por período
 		const amountsByPeriod: IStackedData[] = []
 		uniquePeriods.forEach((period) => {
@@ -56,11 +50,7 @@ export abstract class BaseService {
 					}
 				}
 			})
-		})
-
-		this.baseLogger.log(
-			`accumulatedByLabel: ${JSON.stringify(amountsByPeriod, null, 2)}`,
-		)
+		});
 		// Calcula o total geral de todos os períodos
 		const totalSum = amountsByPeriod.reduce(
 			(acc, stackedItem) => acc + stackedItem.entry[1],
@@ -80,10 +70,7 @@ export abstract class BaseService {
 					entry: [label, percentual],
 				}
 			},
-		)
-		this.baseLogger.log(
-			`percentualByLabel: ${JSON.stringify(percentualByLabel, null, 2)}`,
-		)
+		);
 		return percentualByLabel
 	}
 
@@ -94,10 +81,7 @@ export abstract class BaseService {
 		const uniquePeriods = data.reduce((acc, current) => {
 			acc.add(current.period)
 			return acc
-		}, new Set())
-		this.baseLogger.log(
-			`uniquePeriods: ${JSON.stringify(uniquePeriods, null, 2)}`,
-		)
+		}, new Set());
 		// Acumula os valores por período
 		const amountsByPeriod: IStackedData[] = []
 		uniquePeriods.forEach((period) => {
@@ -116,11 +100,7 @@ export abstract class BaseService {
 					}
 				}
 			})
-		})
-
-		this.baseLogger.log(
-			`accumulatedByLabel: ${JSON.stringify(amountsByPeriod, null, 2)}`,
-		)
+		});
 		// Calcula o total geral de todos os períodos
 		const totalSum = amountsByPeriod.reduce(
 			(acc, stackedItem) => acc + stackedItem.entry[1],
@@ -140,9 +120,6 @@ export abstract class BaseService {
 					entry: ['period', percentual],
 				}
 			},
-		)
-		this.baseLogger.log(
-			`percentualByLabel: ${JSON.stringify(percentualByLabel, null, 2)}`,
 		)
 		return percentualByLabel
 	}
