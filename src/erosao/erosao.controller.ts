@@ -39,9 +39,9 @@ export class ErosaoController extends BaseController<ErosaoService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
-    example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, cultura.',
+    example: 'pastagem',
+    enum: ['pastagem', 'cultura'],
   })
   @ApiResponse({
     status: 200,
@@ -60,9 +60,9 @@ export class ErosaoController extends BaseController<ErosaoService> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
-    example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, cultura.',
+    example: 'pastagem',
+    enum: ['pastagem', 'cultura'],
   })
   @ApiResponse({
     status: 200,
