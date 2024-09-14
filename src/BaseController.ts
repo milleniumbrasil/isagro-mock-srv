@@ -24,7 +24,6 @@ export class BaseController<T extends BaseService> {
     return this.service.getPercentualDataByLabel(label);
   }
 
-  @Get(':label')
   getDataByLabel(@Param('label') label: string): IStackedData[] {
     const validLabels = this.service.getValidLabels();
     if (!validLabels.includes(label)) {

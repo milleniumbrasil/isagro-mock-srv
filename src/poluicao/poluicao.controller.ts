@@ -73,6 +73,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   })
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get(':label')
   getDataByLabel(label: string) {
     return super.getDataByLabel(label);
   }
