@@ -13,6 +13,8 @@ import { GEEService } from "./gee/gee.service"
 import { NH3Service } from "./nh3/nh3.service"
 import { PoluicaoService } from "./poluicao/poluicao.service"
 import { OrganicasService } from "./organicas/organicas.service"
+import { PesticitasController } from "./pesticidas/pesticidas.controller"
+import { PesticitasService } from "./pesticidas/pesticidas.service"
 
 @Module({
 	imports: [],
@@ -22,6 +24,7 @@ import { OrganicasService } from "./organicas/organicas.service"
 		NPKController,
 		GEEController,
 		NH3Controller,
+		PesticitasController,
 		PoluicaoController,
 		OrganicasController,
 	],
@@ -31,6 +34,7 @@ import { OrganicasService } from "./organicas/organicas.service"
 		NPKService,
 		GEEService,
 		NH3Service,
+		PesticitasService,
 		PoluicaoService,
 		OrganicasService,
 	],
