@@ -39,9 +39,9 @@ export class NH3Controller extends BaseController<NH3Service> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: fertilizantes químicos, fertilizantes orgânicos, manejo de esterco, deposição de extretas, queimas de resíduos de culturas',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['fertilizantes químicos', 'fertilizantes orgânicos', 'manejo de esterco', 'deposição de extretas', 'queimas de resíduos de culturas'],
   })
   @ApiResponse({
     status: 200,
@@ -60,9 +60,9 @@ export class NH3Controller extends BaseController<NH3Service> {
   @ApiParam({
     name: 'label',
     required: true,
-    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os dados devem ser retornados. Opções: fertilizantes químicos, fertilizantes orgânicos, manejo de esterco, deposição de extretas, queimas de resíduos de culturas',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['fertilizantes químicos', 'fertilizantes orgânicos', 'manejo de esterco', 'deposição de extretas', 'queimas de resíduos de culturas'],
   })
   @ApiResponse({
     status: 200,

@@ -8,55 +8,46 @@ export class NH3Service extends BaseService {
     private readonly logger = new Logger(NH3Service.name);
 
 	public getValidLabels(): string[] {
-		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
+		return ['fertilizantes químicos', 'fertilizantes orgânicos', 'manejo de esterco', 'deposição de extretas', 'queimas de resíduos de culturas'];
 	}
 
 	public getData(): IData[] {
 		return [
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["grão", 100] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["hortaliças", 150] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1990", entry: ["fruticultura", 50] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1990", entry: ["pastagem", 10] },
+			// Dados de 1990
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["fertilizantes químicos", 100] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["fertilizantes orgânicos", 150] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1990", entry: ["manejo de esterco", 50] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1990", entry: ["deposição de extretas", 10] },
 
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["grão", 110] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["hortaliças", 160] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1990", entry: ["fruticultura", 60] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1990", entry: ["pastagem", 20] },
+			// Dados de 1991
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1991", entry: ["fertilizantes químicos", 200] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1991", entry: ["fertilizantes orgânicos", 250] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1991", entry: ["manejo de esterco", 150] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1991", entry: ["deposição de extretas", 110] },
 
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1991", entry: ["grão", 250] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1991", entry: ["hortaliças", 350] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1991", entry: ["fruticultura", 200] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1991", entry: ["pastagem", 100] },
+			// Dados de 1992
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1992", entry: ["fertilizantes químicos", 300] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1992", entry: ["fertilizantes orgânicos", 350] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1992", entry: ["manejo de esterco", 250] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1992", entry: ["deposição de extretas", 210] },
 
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1992", entry: ["grão", 400] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1992", entry: ["hortaliças", 500] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1992", entry: ["fruticultura", 450] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1992", entry: ["pastagem", 250] },
+			// Dados de 1993
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1993", entry: ["fertilizantes químicos", 400] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1993", entry: ["fertilizantes orgânicos", 450] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1993", entry: ["manejo de esterco", 350] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1993", entry: ["deposição de extretas", 310] },
 
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1992", entry: ["grão", 410] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1992", entry: ["hortaliças", 510] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1992", entry: ["fruticultura", 460] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1992", entry: ["pastagem", 260] },
+			// Dados de 1994
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1994", entry: ["fertilizantes químicos", 900] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1994", entry: ["fertilizantes orgânicos", 900] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1994", entry: ["manejo de esterco", 1100] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1994", entry: ["deposição de extretas", 900] },
 
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1993", entry: ["grão", 800] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1993", entry: ["hortaliças", 750] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1993", entry: ["fruticultura", 800] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1993", entry: ["pastagem", 450] },
-
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1994", entry: ["grão", 900] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1994", entry: ["hortaliças", 900] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1994", entry: ["fruticultura", 1100] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1994", entry: ["pastagem", 900] },
-
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1994", entry: ["grão", 910] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1994", entry: ["hortaliças", 910] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1994", entry: ["fruticultura", 1110] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1994", entry: ["pastagem", 910] },
-
-			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1995", entry: ["grão", 1200] },
-			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["hortaliças", 1300] },
-			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["fruticultura", 1450] },
-			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["pastagem", 9000] },
+			// Dados de 1995
+			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1995", entry: ["fertilizantes químicos", 1200] },
+			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["fertilizantes orgânicos", 1300] },
+			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["manejo de esterco", 1450] },
+			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["deposição de extretas", 9000] },
 		] as IData[];
 	}
 }
