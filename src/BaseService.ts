@@ -19,6 +19,7 @@ export abstract class BaseService {
 		const data: IData[] = this.getData();
 		return this.toStackedData(data);
 	}
+
 	// Método comum para todos os serviços
 	public getStackedData(): IStackedData[] {
 		return this.getStackedDataValues()
@@ -120,7 +121,8 @@ export abstract class BaseService {
 		return amountsByPeriod;
 	}
 
-	protected getStackedPeriodsByCountry(data: IStackedData[], country: string): IStackedData[] {
+	public getStackedPeriodsByCountry(country: string): IStackedData[] {
+		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo country fornecido
 		const filteredByCountry: IStackedData[] = data.filter((stackedItem) => {
 			return stackedItem.entry[0] === country;
@@ -128,7 +130,8 @@ export abstract class BaseService {
 		return filteredByCountry;
 	}
 
-	protected getStackedPeriodsByState(data: IStackedData[], state: string): IStackedData[] {
+	public getStackedPeriodsByState(state: string): IStackedData[] {
+		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo state fornecido
 		const filteredByState: IStackedData[] = data.filter((stackedItem) => {
 			return stackedItem.entry[0] === state;
@@ -136,7 +139,8 @@ export abstract class BaseService {
 		return filteredByState;
 	}
 
-	protected getStackedPeriodsByCity(data: IStackedData[], city: string): IStackedData[] {
+	public getStackedPeriodsByCity(city: string): IStackedData[] {
+		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo city fornecido
 		const filteredByCity: IStackedData[] = data.filter((stackedItem) => {
 			return stackedItem.entry[0] === city;
