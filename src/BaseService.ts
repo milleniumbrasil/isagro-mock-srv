@@ -121,7 +121,7 @@ export abstract class BaseService {
 		return amountsByPeriod;
 	}
 
-	public getStackedPeriodsByCountry(country: string): IStackedData[] {
+	public getStackedByCountry(country: string): IStackedData[] {
 		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo country fornecido
 		const filteredByCountry: IStackedData[] = data.filter((stackedItem) => {
@@ -130,7 +130,7 @@ export abstract class BaseService {
 		return filteredByCountry;
 	}
 
-	public getStackedPeriodsByState(state: string): IStackedData[] {
+	public getStackedByState(state: string): IStackedData[] {
 		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo state fornecido
 		const filteredByState: IStackedData[] = data.filter((stackedItem) => {
@@ -139,7 +139,7 @@ export abstract class BaseService {
 		return filteredByState;
 	}
 
-	public getStackedPeriodsByCity(city: string): IStackedData[] {
+	public getStackedByCity(city: string): IStackedData[] {
 		const data: IStackedData[] = this.getStackedDataValues();
 		// Filtra os dados pelo city fornecido
 		const filteredByCity: IStackedData[] = data.filter((stackedItem) => {

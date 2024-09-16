@@ -6,6 +6,18 @@ import { IPercentualData, IStackedData } from './types';
 
 export class BaseController<T extends BaseService> {
 
+  getStackedByCountry(country: string) {
+    return this.service.getStackedByCountry(country);
+  }
+
+  getStackedByState(state: string) {
+    return this.service.getStackedByState(state);
+  }
+
+  getStackedByCity(city: string) {
+    return this.service.getStackedByCity(city);
+  }
+
   constructor(protected readonly service: T) {}
 
   getStackedData(): IStackedData[] {
