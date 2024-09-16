@@ -11,7 +11,7 @@ export class GEEService extends BaseService {
 		return ['tecnologia2', 'tecnologia1', 'tecnologia3', 'tecnologia4'];
 	}
 
-	public getData(): IData[] {
+	public getData<T>(): T[] {
 		return [
 			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["tecnologia1", 100] },
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["tecnologia4", 150] },
@@ -57,7 +57,7 @@ export class GEEService extends BaseService {
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["tecnologia4", 1300] },
 			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["tecnologia3", 1450] },
 			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["tecnologia2", 9000] },
-		] as IData[];
+		] as T[];
 	}
 }
 

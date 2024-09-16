@@ -11,7 +11,7 @@ export class OrganicasService extends BaseService {
 		return ['pastagem', 'grão', 'fruticultura', 'hortaliças'];
 	}
 
-	public getData(): IData[] {
+	public getData<T>(): T[] {
 		return [
 			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["grão", 100] },
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["hortaliças", 150] },
@@ -57,6 +57,6 @@ export class OrganicasService extends BaseService {
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["hortaliças", 1300] },
 			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["fruticultura", 1450] },
 			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["pastagem", 9000] },
-		] as IData[];
+		] as T[];
 	}
 }

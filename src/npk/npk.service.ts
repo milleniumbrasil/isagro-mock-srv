@@ -11,7 +11,7 @@ export class NPKService extends BaseService {
 		return ['dejetos animais', 'deposição atmosférica', 'fertilizantes minerais', 'fertilizantes orgânicos', 'fixação biológica de nitrogênio', 'resíduos culturais', 'resíduos industriais', 'resíduos urbanos', 'produção carne bovina', 'produção agrícola', 'área agropecuária'];
 	}
 
-	public getData(): IData[] {
+	public getData<T>(): T[] {
 		return [
 			// Dados de 1990
 			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["dejetos animais", 100] },
@@ -91,7 +91,7 @@ export class NPKService extends BaseService {
 			{ country: "BR", state: "MS", city: "Campo Grande", period: "1995", entry: ["produção agrícola", 2000] },
 			{ country: "BR", state: "GO", city: "Goiânia", period: "1995", entry: ["área agropecuária", 2100] },
 
-		] as IData[];
+		] as T[];
 	}
 }
 

@@ -11,7 +11,7 @@ export class NH3Service extends BaseService {
 		return ['fertilizantes químicos', 'fertilizantes orgânicos', 'manejo de esterco', 'deposição de extretas', 'queimas de resíduos de culturas'];
 	}
 
-	public getData(): IData[] {
+	public getData<T>(): T[] {
 		return [
 			// Dados de 1990
 			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["fertilizantes químicos", 100] },
@@ -48,7 +48,7 @@ export class NH3Service extends BaseService {
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["fertilizantes orgânicos", 1300] },
 			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["manejo de esterco", 1450] },
 			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["deposição de extretas", 9000] },
-		] as IData[];
+		] as T[];
 	}
 }
 

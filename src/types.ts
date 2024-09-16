@@ -25,6 +25,11 @@ export class IStackedData {
 	entry: [label: string, value: number]
 }
 
+export interface ICountry {
+	iso: string;
+	country: string;
+}
+
 export class IData {
 	@ApiProperty({
 		description: "País relacionado aos dados",

@@ -11,7 +11,7 @@ export class PesticitasService extends BaseService {
 		return ['herbicidas', 'fungicidas', 'inseticitas', 'outros'];
 	}
 
-	public getData(): IData[] {
+	public getData<T>(): T[] {
 		return [
 			{ country: "BR", state: "RJ", city: "Rio de Janeiro", period: "1990", entry: ["fungicidas", 100] },
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1990", entry: ["outros", 150] },
@@ -57,6 +57,6 @@ export class PesticitasService extends BaseService {
 			{ country: "BR", state: "SP", city: "São Paulo", period: "1995", entry: ["outros", 1300] },
 			{ country: "BR", state: "DF", city: "Brasília", period: "1995", entry: ["inseticitas", 1450] },
 			{ country: "BR", state: "PR", city: "Curitiba", period: "1995", entry: ["herbicidas", 9000] },
-		] as IData[];
+		] as T[];
 	}
 }

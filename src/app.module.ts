@@ -15,10 +15,19 @@ import { PoluicaoService } from "./poluicao/poluicao.service"
 import { OrganicasService } from "./organicas/organicas.service"
 import { PesticitasController } from "./pesticidas/pesticidas.controller"
 import { PesticitasService } from "./pesticidas/pesticidas.service"
+import { CountryController } from "./country/country.controller"
+import { CountryService } from "./country/country.service"
+import { StateController } from "./state/state.controller"
+import { StateService } from "./state/state.service"
+import { CityService } from "./city/city.service"
+import { CityController } from "./city/city.controller"
 
 @Module({
 	imports: [],
 	controllers: [
+		CityController,
+		StateController,
+		CountryController,
 		ErosaoController,
 		GEEController,
 		NPKController,
@@ -29,6 +38,9 @@ import { PesticitasService } from "./pesticidas/pesticidas.service"
 		OrganicasController,
 	],
 	providers: [
+		CityService,
+		StateService,
+		CountryService,
 		ErosaoService,
 		GEEService,
 		NPKService,
