@@ -120,6 +120,30 @@ export abstract class BaseService {
 		return amountsByPeriod;
 	}
 
+	protected getStackedPeriodsByCountry(data: IStackedData[], country: string): IStackedData[] {
+		// Filtra os dados pelo country fornecido
+		const filteredByCountry: IStackedData[] = data.filter((stackedItem) => {
+			return stackedItem.entry[0] === country;
+		});
+		return filteredByCountry;
+	}
+
+	protected getStackedPeriodsByState(data: IStackedData[], state: string): IStackedData[] {
+		// Filtra os dados pelo state fornecido
+		const filteredByState: IStackedData[] = data.filter((stackedItem) => {
+			return stackedItem.entry[0] === state;
+		});
+		return filteredByState;
+	}
+
+	protected getStackedPeriodsByCity(data: IStackedData[], city: string): IStackedData[] {
+		// Filtra os dados pelo city fornecido
+		const filteredByCity: IStackedData[] = data.filter((stackedItem) => {
+			return stackedItem.entry[0] === city;
+		});
+		return filteredByCity;
+	}
+
 	protected getPercentualByPeriods(
 		data: IStackedData[]
 	): IStackedData[] {
