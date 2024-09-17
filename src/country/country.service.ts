@@ -1,5 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common"
 import { BaseService } from "../BaseService"
+import { ICountry, IStackedData } from "src/types";
 
 @Injectable()
 export class CountryService extends BaseService {
@@ -418,4 +419,15 @@ export class CountryService extends BaseService {
 			{ iso: "ZW", country: "Zimbabwe " },
 		] as T[];
 	}
+
+	public getCountryByISO(iso: string): ICountry {
+		const countries: ICountry[] = this.getData();
+		// Filtra os dados pelo country fornecido
+		const result: ICountry | undefined = countries.find((iCountry) => iCountry.iso === iso);
+		if (!result) {
+			throw new Error(`Country with ISO code ${iso} not found`);
+		}
+		return result;
+	}
+
 }

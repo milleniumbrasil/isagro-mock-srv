@@ -56,13 +56,23 @@ export class OrganicasController extends BaseController<OrganicasService> {
     return super.getDataByLabel(label);
   }
 
-  @ApiOperation({ summary: 'Obter números absolutos de orgânicas por cidade' })
+  @ApiOperation({ summary: 'Obter números absolutos de orgânicas por estado' })
   @ApiParam({
     name: 'cidade',
     required: true,
-    description: 'O cidade para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
     example: 'hortaliças',
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+  })
+  @ApiParam({
+    name: 'estado',
+    required: true,
+    description: 'O estado para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc.',
+    example: 'SP',
+    enum: [
+		'AC', 'MS', 'RS', 'CE', 'RO', 'SC', 'SE', 'AP', 'PB', 'AL', 'PE', 'PR', 'RJ', 'MT',
+		'DF', 'AM', 'BA', 'SP', 'ES', 'PI', 'PA', 'RR', 'MA', 'TO', 'GO', 'RN', 'MG'
+		],
   })
   @ApiResponse({
     status: 200,
@@ -72,12 +82,19 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'Cidade inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':city')
-  getDataByCity(@Param('city') city: string) {
-    return super.getStackedByCity(city);
+  @Get(':label/:city')
+  getDataByCity(@Param('label') label: string, @Param('city') city: string) {
+    return super.getStackedByCity(label, city);
   }
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por estado' })
+  @ApiParam({
+    name: 'label',
+    required: true,
+    description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    example: 'hortaliças',
+    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+  })
   @ApiParam({
     name: 'estado',
     required: true,
@@ -93,9 +110,9 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'Estado inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':state')
-  getDataByState(@Param('state') state: string) {
-    return super.getStackedByState(state);
+  @Get(':label:state')
+  getDataByState(@Param('label') label: string, @Param('state') state: string) {
+    return super.getStackedByState(label, state);
   }
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por país' })
@@ -116,7 +133,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':country')
   getDataByCountry(@Param('country') country: string) {
-    return super.getStackedByCountry(country);
+    return this.service.getStackedByCountry(country);
   }
 
   @ApiOperation({ summary: 'Obter dados percentuais de orgânicas por label' })

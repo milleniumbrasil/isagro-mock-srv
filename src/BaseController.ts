@@ -1,21 +1,24 @@
 // src/BaseController.ts
 
-import { BadRequestException, Get, Param } from '@nestjs/common';
+import { BadRequestException, Get, Logger, Param } from '@nestjs/common';
 import { BaseService } from './BaseService';
-import { IPercentualData, IStackedData } from './types';
+import { ICountry, IData, IPercentualData, IStackedData } from './types';
+import { CountryService } from './country/country.service';
 
 export class BaseController<T extends BaseService> {
 
-  getStackedByCountry(country: string) {
-    return this.service.getStackedByCountry(country).filter((item) => item.entry[0] === country);
+	private readonly baseLogger = new Logger(BaseController.name);
+
+  getStackedByCountry(label: string, country: string) {
+    return this.service.getStackedByCountry(label, country);
   }
 
-  getStackedByState(state: string) {
-    return this.service.getStackedByState(state);
+  getStackedByState(label: string, state: string) {
+    return this.service.getStackedByState(label, state);
   }
 
-  getStackedByCity(city: string) {
-    return this.service.getStackedByCity(city);
+  getStackedByCity(label: string, city: string) {
+    return this.service.getStackedByCity(label, city);
   }
 
   constructor(protected readonly service: T) {}
