@@ -67,6 +67,16 @@ export class OrganicasController extends BaseController<OrganicasService> {
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
   })
   @ApiParam({
+    name: 'estado',
+    required: true,
+    description: 'O estado para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc.',
+    example: 'SP',
+    enum: [
+		'AC', 'MS', 'RS', 'CE', 'RO', 'SC', 'SE', 'AP', 'PB', 'AL', 'PE', 'PR', 'RJ', 'MT',
+		'DF', 'AM', 'BA', 'SP', 'ES', 'PI', 'PA', 'RR', 'MA', 'TO', 'GO', 'RN', 'MG'
+		],
+  })
+  @ApiParam({
     name: 'cidade',
     required: true,
     description: 'O label para o qual os dados devem ser retornados. Opções: Maceió, Manaus, etc.',
@@ -129,17 +139,8 @@ export class OrganicasController extends BaseController<OrganicasService> {
 		'Campinas',
 		'Santos',
 		'São Paulo',
-		'Palmas',],
-  })
-  @ApiParam({
-    name: 'estado',
-    required: true,
-    description: 'O estado para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc.',
-    example: 'SP',
-    enum: [
-		'AC', 'MS', 'RS', 'CE', 'RO', 'SC', 'SE', 'AP', 'PB', 'AL', 'PE', 'PR', 'RJ', 'MT',
-		'DF', 'AM', 'BA', 'SP', 'ES', 'PI', 'PA', 'RR', 'MA', 'TO', 'GO', 'RN', 'MG'
-		],
+		'Palmas',
+	],
   })
   @ApiResponse({
     status: 200,
@@ -165,9 +166,12 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiParam({
     name: 'estado',
     required: true,
-    description: 'O estado para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
-    example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    description: 'O estado para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc.',
+    example: 'SP',
+    enum: [
+		'AC', 'MS', 'RS', 'CE', 'RO', 'SC', 'SE', 'AP', 'PB', 'AL', 'PE', 'PR', 'RJ', 'MT',
+		'DF', 'AM', 'BA', 'SP', 'ES', 'PI', 'PA', 'RR', 'MA', 'TO', 'GO', 'RN', 'MG'
+		],
   })
   @ApiResponse({
     status: 200,
