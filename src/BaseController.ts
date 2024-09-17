@@ -26,7 +26,10 @@ export class BaseController<T extends BaseService> {
 
   getStackedByCity(label: string, state: string, city: string) {
 	const cityTaken: ICity = this.cityService.getCityByISO(state, city);
-    return this.service.getStackedByCity(label, cityTaken);
+	this.logger.log(`Buscando dados de ${label} para ${cityTaken.name}, ${cityTaken.abbreviation}.`);
+    const result = this.service.getStackedByCity(label, cityTaken);
+	this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
+	return result;
   }
 
   constructor(protected readonly service: T) {}

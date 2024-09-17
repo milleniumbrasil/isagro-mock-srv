@@ -32,13 +32,18 @@ export abstract class BaseService {
 
 	public getStackedByCity(label: string, city: ICity): IStackedData[] {
 		const data: IData[] = this.getData();
+		this.baseLogger.log(`Buscando dados de ${label} para ${city.name}, ${city.abbreviation} em ${JSON.stringify(data)}.`);
 		const filteredDataByLabelNCity = data.filter((item) => {
-			if (label) {
-				return item.state.endsWith(city.abbreviation) && item.city === city.name && item.entry[0] === label;
-			}
-			return item.state.endsWith(city.abbreviation) && item.city === city.name;
+			return (
+				item.state === city.abbreviation &&  // Compara o estado exatamente
+				item.city === city.name &&           // Compara o nome da cidade exatamente
+				(!label || item.entry[0] === label)  // Filtra pelo label se ele for fornecido
+			);
 		});
-		return this.toStackedData(filteredDataByLabelNCity);
+		this.baseLogger.log(`Resultado da busca: ${JSON.stringify(filteredDataByLabelNCity, null, 2)}`);
+		const result = this.toStackedData(filteredDataByLabelNCity);
+		this.baseLogger.log(`Resultado da conversão para IStackedData: ${JSON.stringify(result, null, 2)}`);
+		return result;
 	}
 
 	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
