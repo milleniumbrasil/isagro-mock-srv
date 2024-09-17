@@ -165,7 +165,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
   })
   @ApiParam({
-    name: 'estado',
+    name: 'state',
     required: true,
     description: 'O estado para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc.',
     example: 'SP',
