@@ -51,7 +51,7 @@ export class NH3Controller extends BaseController<NH3Service> {
   })
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get('percentual/:label')
+  @Get('percentuals/:label')
   getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }

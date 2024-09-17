@@ -149,7 +149,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'Cidade inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':label/:city')
+  @Get(':label/states/:state/cities/:city')
   getDataByCity(@Param('label') label: string, @Param('state') state: string, @Param('city') city: string) {
     return super.getStackedByCity(label, state, city);
   }
@@ -177,7 +177,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'Estado inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':label:state')
+  @Get(':label/states/:state')
   getDataByState(@Param('label') label: string, @Param('state') state: string) {
     return super.getStackedByState(label, state);
   }
@@ -205,7 +205,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'país inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':label/:country')
+  @Get(':label/countries/:country')
   getDataByCountry(@Param('label') label: string, @Param('country') country: string) {
 	const countryTaken = this.countryService.getCountryByISO(country);
     return this.service.getStackedByCountry(label, countryTaken);
@@ -227,7 +227,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get('percentual/:label')
+  @Get(':label/percentuals')
   getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
