@@ -52,7 +52,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   })
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get('percentuals/:label')
+  @Get(':label/percentuals')
   getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
