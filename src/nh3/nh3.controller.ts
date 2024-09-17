@@ -40,7 +40,7 @@ export class NH3Controller extends BaseController<NH3Service> {
     name: 'label',
     required: true,
     description: 'O label para o qual os percentuais devem ser retornados. Opções: fertilizantes químicos, fertilizantes orgânicos, manejo de esterco, deposição de extretas, queimas de resíduos de culturas',
-    example: 'hortaliças',
+    example: 'fertilizantes químicos',
     enum: ['fertilizantes químicos', 'fertilizantes orgânicos', 'manejo de esterco', 'deposição de extretas', 'queimas de resíduos de culturas'],
   })
   @ApiResponse({
