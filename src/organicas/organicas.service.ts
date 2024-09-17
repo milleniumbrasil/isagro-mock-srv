@@ -8,7 +8,7 @@ export class OrganicasService extends BaseService {
     private readonly logger = new Logger(OrganicasService.name);
 
 	public getValidLabels(): string[] {
-		return ['BR', 'US', 'FR'];
+		return ['grão', 'hortaliças', 'fruticultura', 'pastagem'];
 	}
 
 	public getData<T>(): T[] {
