@@ -5,10 +5,15 @@ import { ICity } from "src/types";
 @Injectable()
 export class CityService extends BaseService {
 
-	getCityByISO(state: string, city: string): ICity {
+	getCityByISO(stateISO: string, cityName: string): ICity {
 		const cities: ICity[] = this.getData();
-		this.logger.log(`Buscando cidades do ISO ${city} em ${cities.length} registros.`);
-		return cities.find((c) => c.abbreviation === state && c.name === city);
+		this.logger.log(`Buscando cidade do ISO ${cityName} de ${stateISO} em ${cities.length} registros.`);
+		const result =  cities.find((city) =>
+			city.abbreviation.toLowerCase() === stateISO.toLowerCase() &&
+			city.name.toLowerCase() === cityName.toLowerCase()
+		);
+		this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
+		return result;
 	}
 
 	private readonly logger = new Logger(CityService.name)

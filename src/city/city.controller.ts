@@ -6,8 +6,6 @@ import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 @Controller('cities')
 export class CityController extends BaseController<CityService> {
 
-	private readonly logger = new Logger(CityController.name)
-
   constructor(service: CityService) {
     super(service);
   }

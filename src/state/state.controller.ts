@@ -6,8 +6,6 @@ import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger"
 @Controller("states")
 export class StateController extends BaseController<StateService> {
 
-	private readonly logger = new Logger(StateController.name)
-
 	constructor(service: StateService) {
 		super(service)
 	}

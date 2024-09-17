@@ -2,7 +2,6 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { OrganicasService } from './organicas.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { CountryService } from 'src/country/country.service';
 
 @Controller('organicas')
 export class OrganicasController extends BaseController<OrganicasService> {
@@ -152,7 +151,9 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label/states/:state/cities/:city')
   getDataByCity(@Param('label') label: string, @Param('state') state: string, @Param('city') city: string) {
-    return super.getStackedByCity(label, state, city);
+    const result = super.getStackedByCity(label, state, city);
+	this.logger.log(`getDataByCity: ${JSON.stringify(result, null, 2)}`);
+	return result;
   }
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por estado' })

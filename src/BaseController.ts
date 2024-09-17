@@ -9,6 +9,7 @@ import { StateService } from './state/state.service';
 
 export class BaseController<T extends BaseService> {
 
+    protected readonly logger = new Logger(BaseController.name);
 	protected readonly countryService = new CountryService();
 	protected readonly stateService = new StateService();
 	protected readonly cityService = new CityService();
