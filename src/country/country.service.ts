@@ -1,10 +1,11 @@
-import { Injectable, Logger } from "@nestjs/common"
+// src/country/country.service.ts
+
+import { Injectable } from "@nestjs/common"
 import { BaseService } from "../BaseService"
-import { ICountry, IStackedData } from "src/types";
+import { ICountry } from "src/types";
 
 @Injectable()
 export class CountryService extends BaseService {
-	private readonly logger = new Logger(CountryService.name)
 
 	public getValidLabels(): string[] {
 		return [

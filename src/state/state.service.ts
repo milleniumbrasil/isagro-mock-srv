@@ -4,7 +4,17 @@ import { ICountry, IState } from "src/types"
 
 @Injectable()
 export class StateService extends BaseService {
-	
+
+	getStateByISO(isoAbbreviation: string): IState {
+		const states: IState[] = this.getData();
+		// Filtra os dados pelo country fornecido
+		const result: IState | undefined = states.find((iState) => iState.iso === isoAbbreviation);
+		if (!result) {
+			throw new Error(`State with ISO code ${isoAbbreviation} not found`);
+		}
+		return result;
+	}
+
 	private readonly logger = new Logger(StateService.name)
 
 	public getValidLabels(): string[] {

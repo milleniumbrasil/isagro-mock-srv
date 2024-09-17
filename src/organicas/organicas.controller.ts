@@ -2,9 +2,11 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { OrganicasService } from './organicas.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { CountryService } from 'src/country/country.service';
 
 @Controller('organicas')
 export class OrganicasController extends BaseController<OrganicasService> {
+
   constructor(service: OrganicasService) {
     super(service);
   }
@@ -58,11 +60,76 @@ export class OrganicasController extends BaseController<OrganicasService> {
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por estado' })
   @ApiParam({
-    name: 'cidade',
-    required: true,
+    name: 'label',
+    required: false,
     description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
     example: 'hortaliças',
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+  })
+  @ApiParam({
+    name: 'cidade',
+    required: true,
+    description: 'O label para o qual os dados devem ser retornados. Opções: Maceió, Manaus, etc.',
+    example: 'Maceió',
+    enum: [
+		'Rio Branco',
+		'Arapiraca',
+		'Maceió',
+		'Manaus',
+		'Parintins',
+		'Macapá',
+		'Feira de Santana',
+		'Ilhéus',
+		'Salvador',
+		'Fortaleza',
+		'Juazeiro do Norte',
+		'Sobral',
+		'Brasília',
+		'Vila Velha',
+		'Vitória',
+		'Anápolis',
+		'Goiânia',
+		'Imperatriz',
+		'São Luís',
+		'Belo Horizonte',
+		'Contagem',
+		'Juiz de Fora',
+		'Uberlândia',
+		'Campo Grande',
+		'Dourados',
+		'Cuiabá',
+		'Rondonópolis',
+		'Belém',
+		'Marabá',
+		'Santarém',
+		'Campina Grande',
+		'João Pessoa',
+		'Caruaru',
+		'Olinda',
+		'Recife',
+		'Parnaíba',
+		'Teresina',
+		'Curitiba',
+		'Londrina',
+		'Maringá',
+		'Angra dos Reis',
+		'Niterói',
+		'Rio de Janeiro',
+		'Mossoró',
+		'Natal',
+		'Porto Velho',
+		'Boa Vista',
+		'Caxias do Sul',
+		'Pelotas',
+		'Porto Alegre',
+		'Blumenau',
+		'Florianópolis',
+		'Joinville',
+		'Aracaju',
+		'Campinas',
+		'Santos',
+		'São Paulo',
+		'Palmas',],
   })
   @ApiParam({
     name: 'estado',
@@ -83,14 +150,14 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'Cidade inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label/:city')
-  getDataByCity(@Param('label') label: string, @Param('city') city: string) {
-    return super.getStackedByCity(label, city);
+  getDataByCity(@Param('label') label: string, @Param('state') state: string, @Param('city') city: string) {
+    return super.getStackedByCity(label, state, city);
   }
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por estado' })
   @ApiParam({
     name: 'label',
-    required: true,
+    required: false,
     description: 'O label para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
     example: 'hortaliças',
     enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
@@ -117,6 +184,13 @@ export class OrganicasController extends BaseController<OrganicasService> {
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por país' })
   @ApiParam({
+    name: 'label',
+    required: false,
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
+    example: 'hortaliças',
+    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+  })
+  @ApiParam({
     name: 'country',
     required: true,
     description: 'O país para o qual os dados devem ser retornados. Opções: BR, US, FR, etc.',
@@ -131,9 +205,10 @@ export class OrganicasController extends BaseController<OrganicasService> {
   })
   @ApiResponse({ status: 400, description: 'país inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get(':country')
-  getDataByCountry(@Param('country') country: string) {
-    return this.service.getStackedByCountry(country);
+  @Get(':label/:country')
+  getDataByCountry(@Param('label') label: string, @Param('country') country: string) {
+	const countryTaken = this.countryService.getCountryByISO(country);
+    return this.service.getStackedByCountry(label, countryTaken);
   }
 
   @ApiOperation({ summary: 'Obter dados percentuais de orgânicas por label' })

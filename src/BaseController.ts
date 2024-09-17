@@ -2,23 +2,30 @@
 
 import { BadRequestException, Get, Logger, Param } from '@nestjs/common';
 import { BaseService } from './BaseService';
-import { ICountry, IData, IPercentualData, IStackedData } from './types';
+import { ICity, ICountry, IPercentualData, IStackedData, IState } from './types';
+import { CityService } from './city/city.service';
 import { CountryService } from './country/country.service';
+import { StateService } from './state/state.service';
 
 export class BaseController<T extends BaseService> {
 
-	private readonly baseLogger = new Logger(BaseController.name);
+	protected readonly countryService = new CountryService();
+	protected readonly stateService = new StateService();
+	protected readonly cityService = new CityService();
 
   getStackedByCountry(label: string, country: string) {
-    return this.service.getStackedByCountry(label, country);
+	const countryTaken: ICountry = this.countryService.getCountryByISO(country);
+    return this.service.getStackedByCountry(label, countryTaken);
   }
 
   getStackedByState(label: string, state: string) {
-    return this.service.getStackedByState(label, state);
+	const stateTaken: IState = this.stateService.getStateByISO(state);
+    return this.service.getStackedByState(label, stateTaken);
   }
 
-  getStackedByCity(label: string, city: string) {
-    return this.service.getStackedByCity(label, city);
+  getStackedByCity(label: string, state: string, city: string) {
+	const cityTaken: ICity = this.cityService.getCityByISO(state, city);
+    return this.service.getStackedByCity(label, cityTaken);
   }
 
   constructor(protected readonly service: T) {}

@@ -1,14 +1,45 @@
 // src/BaseService.ts
 
 import { Injectable, Logger } from "@nestjs/common"
-import { ICountry, IData, IPercentualData, IStackedData } from "./types"
-import { CountryService } from "./country/country.service";
+import { ICity, ICountry, IData, IPercentualData, IStackedData, IState } from "./types"
 
 @Injectable()
 export abstract class BaseService {
 
-	private readonly baseLogger = new Logger(BaseService.name);
-	private readonly countryService = new CountryService();
+	protected readonly baseLogger = new Logger(BaseService.name);
+
+	public getStackedByCountry(label: string, country: ICountry): IStackedData[] {
+		const data: IData[] = this.getData();
+		const filteredDataByLabelNCountry = data.filter((item) => {
+			if (label) {
+				return item.country === country.iso && item.entry[0] === label;
+			}
+			return item.country === country.iso;
+		});
+		return this.toStackedData(filteredDataByLabelNCountry);
+	}
+
+	public getStackedByState(label: string, state: IState): IStackedData[] {
+		const data: IData[] = this.getData();
+		const filteredDataByLabelNState = data.filter((item) => {
+			if (label) {
+				return item.state.endsWith(state.abbreviation) && item.entry[0] === label;
+			}
+			return item.state.endsWith(state.abbreviation);
+		});
+		return this.toStackedData(filteredDataByLabelNState);
+	}
+
+	public getStackedByCity(label: string, city: ICity): IStackedData[] {
+		const data: IData[] = this.getData();
+		const filteredDataByLabelNCity = data.filter((item) => {
+			if (label) {
+				return item.state.endsWith(city.abbreviation) && item.city === city.name && item.entry[0] === label;
+			}
+			return item.state.endsWith(city.abbreviation) && item.city === city.name;
+		});
+		return this.toStackedData(filteredDataByLabelNCity);
+	}
 
 	// Método genérico que deve ser implementado nas subclasses para fornecer os dados
 	public abstract getData<T>(): T[]
@@ -25,18 +56,6 @@ export abstract class BaseService {
 	// Método comum para todos os serviços
 	public getStackedData(): IStackedData[] {
 		return this.getStackedDataValues()
-	}
-
-	public getStackedByCountry(label: string, country: string): IStackedData[] {
-		const countryTaken: ICountry = this.countryService.getCountryByISO(country);
-		const data: IData[] = this.getData();
-		const filteredDataByLabelNCountry = data.filter((item) => {
-			if (label) {
-				return item.country === countryTaken.iso && item.entry[0] === label;
-			}
-			return item.country === countryTaken.iso;
-		});
-		return this.toStackedData(filteredDataByLabelNCountry);
 	}
 
 	protected toPercentualData(data: IStackedData[]): IPercentualData[] {
@@ -133,24 +152,6 @@ export abstract class BaseService {
 		}, [] as IStackedData[]);
 
 		return amountsByPeriod;
-	}
-
-	public getStackedByState(state: string): IStackedData[] {
-		const data: IStackedData[] = this.getStackedDataValues();
-		// Filtra os dados pelo state fornecido
-		const filteredByState: IStackedData[] = data.filter((stackedItem) => {
-			return stackedItem.entry[0] === state;
-		});
-		return filteredByState;
-	}
-
-	public getStackedByCity(city: string): IStackedData[] {
-		const data: IStackedData[] = this.getStackedDataValues();
-		// Filtra os dados pelo city fornecido
-		const filteredByCity: IStackedData[] = data.filter((stackedItem) => {
-			return stackedItem.entry[0] === city;
-		});
-		return filteredByCity;
 	}
 
 	protected getPercentualByPeriods(
