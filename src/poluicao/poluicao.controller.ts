@@ -31,7 +31,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get('percentual')
+  @Get('percentuals')
   getPercentualData() {
     return super.getPercentualData();
   }

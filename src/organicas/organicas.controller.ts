@@ -32,7 +32,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
     isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
-  @Get('percentual')
+  @Get('percentuals')
   getPercentualData() {
     return super.getPercentualData();
   }
