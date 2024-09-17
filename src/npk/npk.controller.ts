@@ -10,10 +10,10 @@ export class NPKController extends BaseController<NPKService> {
     super(service);
   }
 
-  @ApiOperation({ summary: 'Obter dados empilhados de orgânicas' })
+  @ApiOperation({ summary: 'Obter dados empilhados de NPK' })
   @ApiResponse({
     status: 200,
-    description: 'Dados empilhados de orgânicas retornados com sucesso.',
+    description: 'Dados empilhados de NPK retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -23,10 +23,10 @@ export class NPKController extends BaseController<NPKService> {
     return super.getStackedData();
   }
 
-  @ApiOperation({ summary: 'Obter dados percentuais de orgânicas' })
+  @ApiOperation({ summary: 'Obter dados percentuais de NPK' })
   @ApiResponse({
     status: 200,
-    description: 'Dados percentuais de orgânicas retornados com sucesso.',
+    description: 'Dados percentuais de NPK retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -36,17 +36,17 @@ export class NPKController extends BaseController<NPKService> {
     return super.getPercentualData();
   }
 
-  @ApiOperation({ summary: 'Obter dados percentuais de orgânicas por label' })
+  @ApiOperation({ summary: 'Obter dados percentuais de NPK por label' })
   @ApiParam({
     name: 'label',
     required: true,
     description: 'O label para o qual os percentuais devem ser retornados. Opções: dejetos animais, deposição atmosférica, fertilizantes minerais, fertilizantes orgânicos, fixação biológica de nitrogênio, resíduos culturais, resíduos industriais, resíduos urbanos, produção carne bovina, produção agrícola, área agropecuária',
     example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    enum: ['dejetos animais', 'deposição atmosférica', 'fertilizantes minerais', 'fertilizantes orgânicos', 'fixação biológica de nitrogênio', 'resíduos culturais', 'resíduos industriais', 'resíduos urbanos', 'produção carne bovina', 'produção agrícola', 'área agropecuária'],
   })
   @ApiResponse({
     status: 200,
-    description: 'Dados percentuais de orgânicas por label retornados com sucesso.',
+    description: 'Dados percentuais de NPK por label retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -57,7 +57,7 @@ export class NPKController extends BaseController<NPKService> {
     return super.getPercentualByLabel(label);
   }
 
-  @ApiOperation({ summary: 'Obter números absolutos de orgânicas por label' })
+  @ApiOperation({ summary: 'Obter números absolutos de NPK por label' })
   @ApiParam({
     name: 'label',
     required: true,
@@ -67,7 +67,7 @@ export class NPKController extends BaseController<NPKService> {
   })
   @ApiResponse({
     status: 200,
-    description: 'Dados absolutos de orgânicas por label retornados com sucesso.',
+    description: 'Dados absolutos de NPK por label retornados com sucesso.',
     type: Object,
     isArray: true,
   })
