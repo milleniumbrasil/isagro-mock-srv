@@ -244,7 +244,7 @@ export class StateController extends BaseController<StateService> {
 		isArray: true,
 	})
 	@ApiResponse({ status: 500, description: "Erro no servidor." })
-	@Get("country/:iso")
+	@Get("countries/:iso")
 	getStatesByCountry(@Param('iso') iso: string) {
 		this.logger.log(`Buscando estados do país ${iso}.`);
 		return this.service.getStatesByCountry(iso)

@@ -44,7 +44,7 @@ export class CityController extends BaseController<CityService> {
 	  isArray: true,
   })
   @ApiResponse({ status: 500, description: "Erro no servidor." })
-  @Get(":stateAbbreviation")
+  @Get("states/:stateAbbreviation")
   getCitiesByState(@Param('stateAbbreviation') stateAbbreviation: string) {
 	  this.logger.log(`Buscando cidades do estado ${stateAbbreviation}.`);
 	  return this.service.getCitiesByState(stateAbbreviation)
