@@ -7,7 +7,7 @@ import { IPercentualData, IStackedData } from './types';
 export class BaseController<T extends BaseService> {
 
   getStackedByCountry(country: string) {
-    return this.service.getStackedByCountry(country);
+    return this.service.getStackedByCountry(country).filter((item) => item.entry[0] === country);
   }
 
   getStackedByState(state: string) {

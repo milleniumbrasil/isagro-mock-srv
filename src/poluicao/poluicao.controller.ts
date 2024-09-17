@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common"
+import { Controller, Get, Param } from "@nestjs/common"
 import { BaseController } from "../BaseController";
 import { ApiOperation, ApiResponse, ApiParam } from "@nestjs/swagger";
 import { PoluicaoService } from "./poluicao.service";
@@ -53,7 +53,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('percentual/:label')
-  getPercentualByLabel(label: string) {
+  getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
 
@@ -74,7 +74,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label')
-  getDataByLabel(label: string) {
+  getDataByLabel(@Param('label') label: string) {
     return super.getDataByLabel(label);
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { OrganicasService } from './organicas.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
@@ -52,7 +52,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label')
-  getDataByLabel(label: string) {
+  getDataByLabel(@Param('label') label: string) {
     return super.getDataByLabel(label);
   }
 
@@ -73,7 +73,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'Cidade inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':city')
-  getDataByCity(city: string) {
+  getDataByCity(@Param('city') city: string) {
     return super.getStackedByCity(city);
   }
 
@@ -94,7 +94,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'Estado inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':state')
-  getDataByState(state: string) {
+  getDataByState(@Param('state') state: string) {
     return super.getStackedByState(state);
   }
 
@@ -102,9 +102,9 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiParam({
     name: 'country',
     required: true,
-    description: 'O país para o qual os dados devem ser retornados. Opções: pastagem, grão, fruticultura, hortaliças',
-    example: 'hortaliças',
-    enum: ['pastagem', 'grão', 'fruticultura', 'hortaliças'],
+    description: 'O país para o qual os dados devem ser retornados. Opções: BR, US, FR, etc.',
+    example: 'BR',
+    enum: ['BR', 'US', 'FR'],
   })
   @ApiResponse({
     status: 200,
@@ -115,7 +115,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'país inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':country')
-  getDataByCountry(country: string) {
+  getDataByCountry(@Param('country') country: string) {
     return super.getStackedByCountry(country);
   }
 
@@ -136,7 +136,7 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('percentual/:label')
-  getPercentualByLabel(label: string) {
+  getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { GEEService } from './gee.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
@@ -52,7 +52,7 @@ export class GEEController extends BaseController<GEEService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('percentual/:label')
-  getPercentualByLabel(label: string) {
+  getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
 
@@ -73,7 +73,7 @@ export class GEEController extends BaseController<GEEService> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label')
-  getDataByLabel(label: string) {
+  getDataByLabel(@Param('label') label: string) {
     return super.getDataByLabel(label);
   }
 }

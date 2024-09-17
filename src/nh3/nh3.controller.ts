@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { NH3Service } from './nh3.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
@@ -52,7 +52,7 @@ export class NH3Controller extends BaseController<NH3Service> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get('percentual/:label')
-  getPercentualByLabel(label: string) {
+  getPercentualByLabel(@Param('label') label: string) {
     return super.getPercentualByLabel(label);
   }
 
@@ -73,7 +73,7 @@ export class NH3Controller extends BaseController<NH3Service> {
   @ApiResponse({ status: 400, description: 'Label inválido.' })
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label')
-  getDataByLabel(label: string) {
+  getDataByLabel(@Param('label') label: string) {
     return super.getDataByLabel(label);
   }
 }
