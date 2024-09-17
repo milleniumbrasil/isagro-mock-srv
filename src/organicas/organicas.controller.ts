@@ -184,7 +184,10 @@ export class OrganicasController extends BaseController<OrganicasService> {
   @ApiResponse({ status: 500, description: 'Erro no servidor.' })
   @Get(':label/states/:state')
   getDataByState(@Param('label') label: string, @Param('state') state: string) {
-    return super.getStackedByState(label, state);
+	this.logger.log(`getDataByState: ${label}, ${state}`);
+    const result = super.getStackedByState(label, state);
+	this.logger.log(`getDataByState result: ${JSON.stringify(result, null, 2)}`);
+	return result;
   }
 
   @ApiOperation({ summary: 'Obter números absolutos de orgânicas por país' })

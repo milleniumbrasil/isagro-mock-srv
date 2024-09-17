@@ -5,13 +5,15 @@ import { ICountry, IState } from "src/types"
 @Injectable()
 export class StateService extends BaseService {
 
+
 	getStateByISO(isoAbbreviation: string): IState {
 		const states: IState[] = this.getData();
-		// Filtra os dados pelo country fornecido
+		this.logger.log(`Buscando estado do ISO ${isoAbbreviation} em ${states.length} registros.`);
 		const result: IState | undefined = states.find((iState) => iState.iso === isoAbbreviation);
 		if (!result) {
 			throw new Error(`State with ISO code ${isoAbbreviation} not found`);
 		}
+		this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
 		return result;
 	}
 
