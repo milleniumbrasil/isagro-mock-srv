@@ -3,7 +3,7 @@ import { NH3Service } from './nh3.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller('nh3')
+@Controller('nh3s')
 export class NH3Controller extends BaseController<NH3Service> {
   constructor(service: NH3Service) {
     super(service);

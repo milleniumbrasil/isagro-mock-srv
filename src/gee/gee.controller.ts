@@ -3,7 +3,7 @@ import { GEEService } from './gee.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller('gee')
+@Controller('gees')
 export class GEEController extends BaseController<GEEService> {
   constructor(service: GEEService) {
     super(service);

@@ -3,7 +3,7 @@ import { CityService } from './city.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller('city')
+@Controller('cities')
 export class CityController extends BaseController<CityService> {
 
 	private readonly logger = new Logger(CityController.name)

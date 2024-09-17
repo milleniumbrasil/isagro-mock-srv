@@ -3,7 +3,7 @@ import { BaseController } from "../BaseController";
 import { ApiOperation, ApiResponse, ApiParam } from "@nestjs/swagger";
 import { PoluicaoService } from "./poluicao.service";
 
-@Controller("poluicao")
+@Controller("poluicoes")
 export class PoluicaoController extends BaseController<PoluicaoService> {
 
   constructor(service: PoluicaoService) {

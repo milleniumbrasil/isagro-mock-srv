@@ -3,7 +3,7 @@ import { CountryService } from './country.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller('country')
+@Controller('countries')
 export class CountryController extends BaseController<CountryService> {
   constructor(service: CountryService) {
     super(service);

@@ -3,7 +3,7 @@ import { ErosaoService } from './erosao.service';
 import { BaseController } from '../BaseController';
 import { ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller('erosao')
+@Controller('erosoes')
 export class ErosaoController extends BaseController<ErosaoService> {
   constructor(service: ErosaoService) {
     super(service);

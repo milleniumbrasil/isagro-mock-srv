@@ -3,7 +3,7 @@ import { BaseController } from "../BaseController";
 import { ApiOperation, ApiResponse, ApiParam } from "@nestjs/swagger";
 import { NPKService } from "./npk.service";
 
-@Controller("npk")
+@Controller("npks")
 export class NPKController extends BaseController<NPKService> {
 
   constructor(service: NPKService) {
