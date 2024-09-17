@@ -8,11 +8,15 @@ export class StateService extends BaseService {
 
 	getStateByISO(isoAbbreviation: string): IState {
 		const states: IState[] = this.getData();
-		this.logger.log(`Buscando estado do ISO ${isoAbbreviation} em ${states.length} registros.`);
-		const result: IState | undefined = states.find((iState) => iState.iso === isoAbbreviation);
+		this.logger.log(`Buscando estado do ISO ${isoAbbreviation} em ${states.length} registros. ${JSON.stringify(states)}`);
+
+		// Ajuste: usa `endsWith` para buscar o estado pela parte final do ISO
+		const result: IState | undefined = states.find((iState) => iState.iso.endsWith(isoAbbreviation));
+
 		if (!result) {
 			throw new Error(`State with ISO code ${isoAbbreviation} not found`);
 		}
+
 		this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
 		return result;
 	}
