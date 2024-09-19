@@ -14,6 +14,8 @@ export class BaseController<T extends BaseService> {
 	protected readonly stateService = new StateService();
 	protected readonly cityService = new CityService();
 
+	constructor(protected readonly service: T) {}
+
   getStackedByCountry(label: string, country: string) {
 	const countryTaken: ICountry = this.countryService.getCountryByISO(country);
     return this.service.getStackedByCountry(label, countryTaken);
@@ -21,24 +23,42 @@ export class BaseController<T extends BaseService> {
 
   getStackedByState(label: string, state: string) {
 	const stateTaken: IState = this.stateService.getStateByISO(state);
-	this.logger.log(`Buscando dados de ${label} para ${stateTaken.name}, ${stateTaken.abbreviation}.`);
+	this.logger.log(`[BaseController] Buscando dados de ${label} para ${stateTaken.name}, ${stateTaken.abbreviation}.`);
     const result =  this.service.getStackedByState(label, stateTaken);
-	this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
+	this.logger.log(`[BaseController] Resultado da busca: ${JSON.stringify(result, null, 2)}`);
 	return result;
   }
 
   getStackedByCity(label: string, state: string, city: string) {
 	const cityTaken: ICity = this.cityService.getCityByISO(state, city);
-	this.logger.log(`Buscando dados de ${label} para ${cityTaken.name}, ${cityTaken.abbreviation}.`);
+	this.logger.log(`[BaseController] Buscando dados de ${label} para ${cityTaken.name}, ${cityTaken.abbreviation}.`);
     const result = this.service.getStackedByCity(label, cityTaken);
-	this.logger.log(`Resultado da busca: ${JSON.stringify(result, null, 2)}`);
+	this.logger.log(`[BaseController] Resultado da busca: ${JSON.stringify(result, null, 2)}`);
 	return result;
   }
 
-  constructor(protected readonly service: T) {}
-
   getStackedData(): IStackedData[] {
     return this.service.getStackedDataValues();
+  }
+
+  periodValidation(period: string) {
+	  const periodRegex = /^\d{4}-\d{4}$/;
+	  if (!periodRegex.test(period)) {
+		  throw new BadRequestException(`[BaseController] O período [${period}] está no formato incorreto. O formato correto é 'ano-ano', como '1990-2000'.`);
+		}
+	}
+
+	parsePeriod(period: string): number[] {
+	const [anoInicial, anoFinal] = period.split('-');
+	console.log(`[BaseController] parsePeriod: Ano Inicial: ${anoInicial}, Ano Final: ${anoFinal}`);
+	return [parseInt(anoInicial), parseInt(anoFinal)];
+	}
+
+  getStackedDataByPeriod(period: string): IStackedData[] {
+	this.periodValidation(period);
+    const rawStackedData = this.service.getStackedDataValues();
+	const [anoInicial, anoFinal] = this.parsePeriod(period);
+	return rawStackedData.filter((data) => parseInt(data.period) >= anoInicial && parseInt(data.period) <= anoFinal);
   }
 
   getPercentualData(): IPercentualData[] {
@@ -48,7 +68,7 @@ export class BaseController<T extends BaseService> {
   getPercentualByLabel(@Param('label') label: string): IPercentualData[] {
     const validLabels = this.service.getValidLabels();
     if (!validLabels.includes(label)) {
-      throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
+      throw new BadRequestException(`[BaseController] Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
     }
     return this.service.getPercentualDataByLabel(label);
   }
@@ -56,7 +76,7 @@ export class BaseController<T extends BaseService> {
   getDataByLabel(@Param('label') label: string): IStackedData[] {
     const validLabels = this.service.getValidLabels();
     if (!validLabels.includes(label)) {
-      throw new BadRequestException(`Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
+      throw new BadRequestException(`[BaseController] Label inválido. As opções válidas são: ${validLabels.join(', ')}`);
     }
     return this.service.getDataByLabel(label);
   }

@@ -10,10 +10,10 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
     super(service);
   }
 
-  @ApiOperation({ summary: 'Obter dados empilhados de orgânicas' })
+  @ApiOperation({ summary: 'Obter dados empilhados de poluições' })
   @ApiResponse({
     status: 200,
-    description: 'Dados empilhados de orgânicas retornados com sucesso.',
+    description: 'Dados empilhados de poluições retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -23,10 +23,30 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
     return super.getStackedData();
   }
 
-  @ApiOperation({ summary: 'Obter dados percentuais de orgânicas' })
+  @ApiOperation({ summary: 'Obter dados empilhados de poluições por período.' })
   @ApiResponse({
     status: 200,
-    description: 'Dados percentuais de orgânicas retornados com sucesso.',
+    description: 'Dados empilhados de poluições retornados com sucesso.',
+    type: Object,
+    isArray: true,
+  })
+  @ApiParam({
+    name: 'period',
+    required: true,
+    description: 'O label para o qual os percentuais devem ser retornados. Opções: 1990-2000, 1995-2010',
+    example: '1990-1995',
+    enum: ['1990-1995', '1992-1994', '1990-2010'],
+  })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get(':period/stacked')
+  getStackedDataByPeriod(@Param('period') period: string) {
+    return super.getStackedDataByPeriod(period);
+  }
+
+  @ApiOperation({ summary: 'Obter dados percentuais de poluições' })
+  @ApiResponse({
+    status: 200,
+    description: 'Dados percentuais de poluições retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -36,7 +56,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
     return super.getPercentualData();
   }
 
-  @ApiOperation({ summary: 'Obter dados percentuais de orgânicas por label' })
+  @ApiOperation({ summary: 'Obter dados percentuais de poluições por label' })
   @ApiParam({
     name: 'label',
     required: true,
@@ -46,7 +66,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   })
   @ApiResponse({
     status: 200,
-    description: 'Dados percentuais de orgânicas por label retornados com sucesso.',
+    description: 'Dados percentuais de poluições por label retornados com sucesso.',
     type: Object,
     isArray: true,
   })
@@ -57,7 +77,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
     return super.getPercentualByLabel(label);
   }
 
-  @ApiOperation({ summary: 'Obter números absolutos de orgânicas por label' })
+  @ApiOperation({ summary: 'Obter números absolutos de poluições por label' })
   @ApiParam({
     name: 'label',
     required: true,
@@ -67,7 +87,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   })
   @ApiResponse({
     status: 200,
-    description: 'Dados absolutos de orgânicas por label retornados com sucesso.',
+    description: 'Dados absolutos de poluições por label retornados com sucesso.',
     type: Object,
     isArray: true,
   })
