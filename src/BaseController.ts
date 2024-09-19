@@ -41,7 +41,7 @@ export class BaseController<T extends BaseService> {
     return this.service.getStackedDataValues();
   }
 
-  periodValidation(period: string) {
+  	periodValidation(period: string) {
 	  const periodRegex = /^\d{4}-\d{4}$/;
 	  if (!periodRegex.test(period)) {
 		  throw new BadRequestException(`[BaseController] O período [${period}] está no formato incorreto. O formato correto é 'ano-ano', como '1990-2000'.`);
@@ -49,9 +49,9 @@ export class BaseController<T extends BaseService> {
 	}
 
 	parsePeriod(period: string): number[] {
-	const [anoInicial, anoFinal] = period.split('-');
-	console.log(`[BaseController] parsePeriod: Ano Inicial: ${anoInicial}, Ano Final: ${anoFinal}`);
-	return [parseInt(anoInicial), parseInt(anoFinal)];
+		const [anoInicial, anoFinal] = period.split('-');
+		console.log(`[BaseController] parsePeriod: Ano Inicial: ${anoInicial}, Ano Final: ${anoFinal}`);
+		return [parseInt(anoInicial), parseInt(anoFinal)];
 	}
 
   getStackedDataByPeriod(period: string): IStackedData[] {
