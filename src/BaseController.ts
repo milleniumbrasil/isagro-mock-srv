@@ -58,7 +58,9 @@ export class BaseController<T extends BaseService> {
 	this.periodValidation(period);
     const rawStackedData = this.service.getStackedDataValues();
 	const [anoInicial, anoFinal] = this.parsePeriod(period);
-	return rawStackedData.filter((data) => parseInt(data.period) >= anoInicial && parseInt(data.period) <= anoFinal);
+	const result = rawStackedData.filter((data) => parseInt(data.period) >= anoInicial && parseInt(data.period) <= anoFinal);
+	console.log(`[BaseController] getStackedDataByPeriod: Resultado: ${result?.length} itens.`);
+	return result;
   }
 
   getPercentualData(): IPercentualData[] {
