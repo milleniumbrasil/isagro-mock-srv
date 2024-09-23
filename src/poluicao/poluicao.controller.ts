@@ -33,7 +33,7 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @ApiParam({
     name: 'period',
     required: true,
-    description: 'O label para o qual os percentuais devem ser retornados. Opções: 1990-2000, 1995-2010',
+    description: 'O label para o qual os dados devem ser retornados. Opções: 1990-2000, 1995-2010',
     example: '1990-1995',
     enum: ['1990-1995', '1992-1994', '1990-2010'],
   })
@@ -41,6 +41,37 @@ export class PoluicaoController extends BaseController<PoluicaoService> {
   @Get(':period/stacked')
   getStackedDataByPeriod(@Param('period') period: string) {
     return super.getStackedDataByPeriod(period);
+  }
+
+  @ApiOperation({ summary: 'Obter dados empilhados de poluições por período e localidade.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Dados empilhados de poluições retornados com sucesso.',
+    type: Object,
+    isArray: true,
+  })
+  @ApiParam({
+    name: 'period',
+    required: true,
+    description: 'O label para o qual os dados devem ser retornados. Opções: 1990-2000, 1995-2010',
+    example: '1990-1995',
+    enum: ['1990-1995', '1992-1994', '1990-2010'],
+  })
+  @ApiParam({
+    name: 'state',
+    required: true,
+    description: 'O label para o qual os dados devem ser retornados. Opções: SP, RJ, MG, etc',
+    example: 'SP',
+    enum: [
+		"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+		"MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
+		"RS", "RO", "RR", "SC", "SP", "SE", "TO",
+	],
+  })
+  @ApiResponse({ status: 500, description: 'Erro no servidor.' })
+  @Get(':period/:state/stacked')
+  getStackedDataByPeriodNState(@Param('period') period: string, @Param('state') state: string) {
+    return super.getStackedDataByPeriodNState(period, state);
   }
 
   @ApiOperation({ summary: 'Obter dados percentuais de poluições' })

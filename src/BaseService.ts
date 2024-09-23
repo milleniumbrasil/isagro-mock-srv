@@ -58,9 +58,40 @@ export abstract class BaseService {
 		return this.toStackedData(data);
 	}
 
+	public parsePeriod(period: string): number[] {
+		const [anoInicial, anoFinal] = period.split('-');
+		console.log(`[BaseService] parsePeriod: Ano Inicial: ${anoInicial}, Ano Final: ${anoFinal}`);
+		return [parseInt(anoInicial), parseInt(anoFinal)];
+	}
+
+	public periodValidation(period: string): void {
+		const periodRegex = /^\d{4}-\d{4}$/;
+		if (!periodRegex.test(period)) {
+			throw new Error(`[BaseService] O período [${period}] está no formato incorreto. O formato correto é 'ano-ano', como '1990-2000'.`);
+		}
+	}
+
+	public getStackedDataByPeriod(period: string): IStackedData[] {
+		this.periodValidation(period);
+		const rawData: IData[] = this.getData();
+		const [anoInicial, anoFinal] = this.parsePeriod(period);
+		const result = rawData.filter((data) => parseInt(data.period) >= anoInicial && parseInt(data.period) <= anoFinal);
+		console.log(`[BaseService] getStackedDataByPeriod: Resultado: ${result?.length} itens.`);
+		return this.toStackedData(result);
+	}
+
+	getStackedDataByPeriodNState(period: string, state: string): IStackedData[] {
+		this.periodValidation(period);
+		const rawData: IData[] = this.getData();
+		const [anoInicial, anoFinal] = this.parsePeriod(period);
+		const result = rawData.filter((data) => parseInt(data.period) >= anoInicial && parseInt(data.period) <= anoFinal && data.state === state);
+		console.log(`[BaseController] getStackedDataByPeriodNState: Resultado: ${result?.length} itens.`);
+		return result;
+	}
+
 	// Método comum para todos os serviços
 	public getStackedData(): IStackedData[] {
-		return this.getStackedDataValues()
+		return this.getStackedDataValues();
 	}
 
 	protected toPercentualData(data: IStackedData[]): IPercentualData[] {
